@@ -40,8 +40,12 @@ public class Simulator {
     public void run() {
         for (int i = 0; i < 10000; i++) {
             tick();
+            if(i == 9999) {
+            	i = 0;
+            }
+          }
         }
-    }
+    
 
     private void tick() {
     	advanceTime();
