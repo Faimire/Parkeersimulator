@@ -26,15 +26,7 @@ public class SimulatorView extends JFrame {
         contentPane.add(carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
-        buttonstart = new JButton("Start");
-        buttonstart.setSize(getPreferredSize());
-        carParkView.add(buttonstart);
         
-        buttonstop = new JButton("Stop");
-        buttonstop.setSize(getPreferredSize());
-        carParkView.add(buttonstop);
-
-
         updateView();
     }
 
