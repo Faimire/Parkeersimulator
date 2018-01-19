@@ -29,7 +29,7 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
     
-    private boolean start = true;// says if the application is started or not
+    private boolean started = true;// says if the application is started or not
 
     public Simulator() {
         entranceCarQueue = new CarQueue();
@@ -40,7 +40,7 @@ public class Simulator {
     }
 
     public void run() {
-        while(start = true) {
+        while(started = true) {
             tick();
             }
           }

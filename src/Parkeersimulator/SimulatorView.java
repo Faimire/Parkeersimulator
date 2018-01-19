@@ -11,6 +11,7 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
+    public JButton buttonstart, buttonstop;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -25,6 +26,14 @@ public class SimulatorView extends JFrame {
         contentPane.add(carParkView, BorderLayout.CENTER);
         pack();
         setVisible(true);
+        buttonstart = new JButton("Start");
+        buttonstart.setSize(getPreferredSize());
+        carParkView.add(buttonstart);
+        
+        buttonstop = new JButton("Stop");
+        buttonstop.setSize(getPreferredSize());
+        carParkView.add(buttonstop);
+
 
         updateView();
     }
@@ -153,7 +162,7 @@ public class SimulatorView extends JFrame {
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
-            return new Dimension(800, 500);
+            return new Dimension(1000, 500);
         }
     
         /**
@@ -207,5 +216,8 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
+
+    
+
 
 }
