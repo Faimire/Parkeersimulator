@@ -23,7 +23,7 @@ public class Simulator {
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
     int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
+    int weekendPassArrivals = 100; // average number of arriving cars per hour
 
     int enterSpeed = 3; // number of cars that can enter per minute
     int paymentSpeed = 7; // number of cars that can pay per minute
@@ -42,6 +42,7 @@ public class Simulator {
     public void run() {
         while(started = true) {
             tick();
+            System.out.println("Days " + day + " Hours " + hour);
             }
           }
         
