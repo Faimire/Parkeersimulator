@@ -89,17 +89,32 @@ public class SimulatorView extends JFrame {
         return car;
     }
 
-    public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+    public Location getFirstFreeLocation(Car car) {
+    	
+    	if(car.getHasToPay() == true) {
+        for (int floor = 1; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if (getCarAt(location) == null) {
                         return location;
                     }
+                    }
                 }
             }
         }
+    	if(car.getHasToPay() == false) {
+            for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+                for (int row = 0; row < getNumberOfRows(); row++) {
+                    for (int place = 0; place < getNumberOfPlaces(); place++) {
+                        Location location = new Location(floor, row, place);
+                        if (getCarAt(location) == null) {
+                            return location;
+                        }
+                        }
+                    }
+                }
+            }
         return null;
     }
 
@@ -162,7 +177,7 @@ public class SimulatorView extends JFrame {
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
-            return new Dimension(1000, 500);
+            return new Dimension(1000, 800);
         }
     
         /**

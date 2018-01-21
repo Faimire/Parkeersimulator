@@ -2,6 +2,7 @@ package Parkeersimulator;
 
 import java.util.Random;
 
+
 public class Simulator {
 
 	private static final String AD_HOC = "1";
@@ -36,6 +37,7 @@ public class Simulator {
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
 		simulatorView = new SimulatorView(3, 6, 30);
+	
 	}
 
 	public void run() {
@@ -106,7 +108,7 @@ public class Simulator {
 		// Remove car from the front of the queue and assign to a parking space.
 		while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
 			Car car = queue.removeCar();
-			Location freeLocation = simulatorView.getFirstFreeLocation();
+			Location freeLocation = simulatorView.getFirstFreeLocation(car);
 			simulatorView.setCarAt(freeLocation, car);
 			i++;
 		}
