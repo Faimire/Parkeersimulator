@@ -40,19 +40,15 @@ public class Simulator {
     }
 
 	public void run() {
-		int tempday = 0;
-		int temphour = 0;
+
 		while (setStarted(true)) {
 			tick();
 
-			if (hour > temphour) {
-				tempday = day;
-				temphour = hour;
-				System.out.println("Days " + day + " Hours " + hour);
 
+				System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
 			}
 		}
-	}
+	
         
     
 
