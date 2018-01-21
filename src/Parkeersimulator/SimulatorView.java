@@ -88,7 +88,7 @@ public class SimulatorView extends JFrame {
         numberOfOpenSpots++;
         return car;
     }
-
+// gives a free location depending on the car itself if it's an adhoc or passcar 
     public Location getFirstFreeLocation(Car car) {
     	
     	if(car.getHasToPay() == true) {
