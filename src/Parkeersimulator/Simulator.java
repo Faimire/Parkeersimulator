@@ -40,7 +40,7 @@ public class Simulator {
     }
 
     public void run() {
-        while(started = true) {
+        while(setStarted(true)) {
             tick();
             System.out.println("Days " + day + " Hours " + hour);
             }
@@ -185,5 +185,14 @@ public class Simulator {
     	simulatorView.removeCarAt(car.getLocation());
         exitCarQueue.addCar(car);
     }
+
+	public boolean isStarted() {
+		return started;
+	}
+
+	public boolean setStarted(boolean started) {
+		this.started = started;
+		return started;
+	}
 
 }
