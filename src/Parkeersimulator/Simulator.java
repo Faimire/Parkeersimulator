@@ -39,12 +39,20 @@ public class Simulator {
         simulatorView = new SimulatorView(3, 6, 30);
     }
 
-    public void run() {
-        while(setStarted(true)) {
-            tick();
-            System.out.println("Days " + day + " Hours " + hour);
-            }
-          }
+	public void run() {
+		int tempday = 0;
+		int temphour = 0;
+		while (setStarted(true)) {
+			tick();
+
+			if (hour > temphour) {
+				tempday = day;
+				temphour = hour;
+				System.out.println("Days " + day + " Hours " + hour);
+
+			}
+		}
+	}
         
     
 
