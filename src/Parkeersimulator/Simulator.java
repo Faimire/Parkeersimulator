@@ -12,7 +12,7 @@ public class Simulator {
 	private CarQueue entrancePassQueue;
 	private CarQueue paymentCarQueue;
 	private CarQueue exitCarQueue;
-	private SimulatorView simulatorView;
+	private static SimulatorView simulatorView;
 
 	private int day = 0;
 	private int hour = 0;
@@ -36,12 +36,7 @@ public class Simulator {
 		entrancePassQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
-		simulatorView = new SimulatorView(3, 6, 30);
-		Swing_Frame frame = new Swing_Frame();
-		frame.setVisible(true);
-		frame.add(simulatorView);
-	
-	
+		simulatorView = App.getSimulatorView();
 	}
 
 	public void run() {
@@ -49,6 +44,7 @@ public class Simulator {
 		while (setStarted(true)) {
 			tick();
 			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
+
 		}
 	}
 

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-public class SimulatorView extends JPanel {
+public class SimulatorView extends JFrame {
     /**
 	 * 
 	 */
@@ -24,9 +24,11 @@ public class SimulatorView extends JPanel {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
+        
 
-        add(carParkView, BorderLayout.CENTER);
-        setVisible(true);
+        Container contentPane = getContentPane();
+        contentPane.add(carParkView, BorderLayout.NORTH);
+        pack();
         
         
         updateView();
