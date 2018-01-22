@@ -22,7 +22,7 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
-    private JProgressBar progressBar;
+    private JProgressBar progressBar1;
 
     private int day = 0;
     private int hour = 0;
@@ -58,20 +58,22 @@ public class Simulator {
 		menuBar.setBounds(0, 0, 1980, 21);
 		simulatorView.getContentPane().add(menuBar);
 		
-		JProgressBar progressBar = new JProgressBar();
-		progressBar.setMaximum(168);
-		progressBar.setMinimum(0);
-		progressBar.setBounds(28, 1016, 146, 14);
-		simulatorView.getContentPane().add(progressBar);
+		JProgressBar progressBar1 = new JProgressBar();
+		progressBar1.setMaximum(168);
+		progressBar1.setMinimum(0);
+		progressBar1.setBounds(10, 32, 146, 14);
+		simulatorView.getContentPane().add(progressBar1);
     }
 
-    public void run() {
+	public void run() {
+	
 
-        while (setStarted(true)) {
-            tick();
-            System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
-        }
-    }
+		while (setStarted(true)) {
+			tick();
+			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
+
+		}
+	}
 
     private void tick() {
     	advanceTime();
