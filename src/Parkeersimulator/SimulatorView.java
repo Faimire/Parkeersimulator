@@ -18,6 +18,7 @@ public class SimulatorView extends JFrame {
     public JButton button1, button2, button3;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    	getContentPane().setBackground(SystemColor.inactiveCaption);
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -29,7 +30,7 @@ public class SimulatorView extends JFrame {
         contentPane = getContentPane();
         contentPane.add(carParkView);
         contentPane.setLayout(null);
-        carParkView.setBounds(500,50,1000,1000); 
+        carParkView.setBounds(550,50,850,500); 
         Buttonsini();
         pack();
         setVisible(true);
