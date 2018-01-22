@@ -14,6 +14,8 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
+    public Container contentPane;
+    public JButton button1, button2, button3;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
@@ -24,10 +26,11 @@ public class SimulatorView extends JFrame {
         
         carParkView = new CarParkView();
 
-        Container contentPane = getContentPane();
+        contentPane = getContentPane();
         contentPane.add(carParkView);
         contentPane.setLayout(null);
-        carParkView.setBounds(500,0,800,500); 
+        carParkView.setBounds(500,50,1000,1000); 
+        Buttonsini();
         pack();
         setVisible(true);
 
@@ -52,6 +55,18 @@ public class SimulatorView extends JFrame {
 
     public int getNumberOfOpenSpots(){
     	return numberOfOpenSpots;
+    }
+    
+    public void Buttonsini() {
+    	button1 = new JButton("START");
+    	button2 = new JButton("PAUSE");
+    	button3 = new JButton("START OVER");
+    	contentPane.add(button1);
+    	contentPane.add(button2);
+    	contentPane.add(button3);
+    	button3.setBounds(100, 700, 273, 65);
+        button2.setBounds(100, 800, 273, 65);
+        button1.setBounds(100, 900, 273, 65);
     }
     
     public Car getCarAt(Location location) {
@@ -173,12 +188,6 @@ public class SimulatorView extends JFrame {
             size = new Dimension(0, 0);
         }
     
-        /**
-         * Overridden. Tell the GUI manager how big we would like to be.
-         */
-        public Dimension getPreferredSize() {
-            return new Dimension(800, 500);
-        }
     
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
@@ -231,5 +240,4 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
-
 }

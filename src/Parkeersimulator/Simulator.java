@@ -5,6 +5,11 @@ import java.awt.Toolkit;
 import java.util.Random;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
+import javax.swing.JProgressBar;
 
 public class Simulator {
 
@@ -17,6 +22,7 @@ public class Simulator {
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
+    private JProgressBar progressBar;
 
     private int day = 0;
     private int hour = 0;
@@ -41,10 +47,22 @@ public class Simulator {
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
+        simulatorView.button2.setBounds(100, 800, 273, 65);
+        simulatorView.button1.setBounds(100, 900, 273, 65);
         simulatorView.setSize(1980,1080);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         simulatorView.setLocation(dim.width/2-simulatorView.getSize().width/2, dim.height/2-simulatorView.getSize().height/2);
 		simulatorView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 1980, 21);
+		simulatorView.getContentPane().add(menuBar);
+		
+		JProgressBar progressBar = new JProgressBar();
+		progressBar.setMaximum(168);
+		progressBar.setMinimum(0);
+		progressBar.setBounds(28, 1016, 146, 14);
+		simulatorView.getContentPane().add(progressBar);
     }
 
     public void run() {
@@ -199,5 +217,4 @@ public class Simulator {
         this.started = started;
         return started;
     }
-
 }
