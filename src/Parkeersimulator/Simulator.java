@@ -37,6 +37,10 @@ public class Simulator {
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
 		simulatorView = new SimulatorView(3, 6, 30);
+		Swing_Frame frame = new Swing_Frame();
+		frame.setVisible(true);
+		frame.add(simulatorView);
+	
 	
 	}
 

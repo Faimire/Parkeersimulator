@@ -28,6 +28,7 @@ public class SimulatorView extends JPanel {
         add(carParkView, BorderLayout.CENTER);
         setVisible(true);
         
+        
         updateView();
     }
 
