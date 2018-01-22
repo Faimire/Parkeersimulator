@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
-    private CarParkView carParkView;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3151124700217177923L;
+	private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -155,7 +159,11 @@ public class SimulatorView extends JFrame {
     
     private class CarParkView extends JPanel {
         
-        private Dimension size;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -6763868542977448053L;
+		private Dimension size;
         private Image carParkImage;    
     
         /**
