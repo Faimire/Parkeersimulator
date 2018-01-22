@@ -5,7 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
-    private CarParkView carParkView;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6914495190824551585L;
+	private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -20,12 +24,13 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
+        
 
         Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.CENTER);
+        contentPane.add(carParkView, BorderLayout.NORTH);
         pack();
-        setVisible(true);
-
+        
+        
         updateView();
     }
 
@@ -83,18 +88,33 @@ public class SimulatorView extends JFrame {
         numberOfOpenSpots++;
         return car;
     }
-
-    public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+// gives a free location depending on the car itself if it's an adhoc or passcar 
+    public Location getFirstFreeLocation(Car car) {
+    	
+    	if(car.getHasToPay() == true) {
+        for (int floor = 1; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
                     if (getCarAt(location) == null) {
                         return location;
                     }
+                    }
                 }
             }
         }
+    	if(car.getHasToPay() == false) {
+            for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+                for (int row = 0; row < getNumberOfRows(); row++) {
+                    for (int place = 0; place < getNumberOfPlaces(); place++) {
+                        Location location = new Location(floor, row, place);
+                        if (getCarAt(location) == null) {
+                            return location;
+                        }
+                        }
+                    }
+                }
+            }
         return null;
     }
 
@@ -139,7 +159,11 @@ public class SimulatorView extends JFrame {
     
     private class CarParkView extends JPanel {
         
-        private Dimension size;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = -6763868542977448053L;
+		private Dimension size;
         private Image carParkImage;    
     
         /**
@@ -153,7 +177,7 @@ public class SimulatorView extends JFrame {
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
-            return new Dimension(800, 500);
+            return new Dimension(1000, 800);
         }
     
         /**
@@ -207,5 +231,8 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
+
+    
+
 
 }
