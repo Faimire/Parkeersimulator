@@ -1,14 +1,14 @@
 package Parkeersimulator;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 6914495190824551585L;
+	private static final long serialVersionUID = -3151124700217177923L;
+
 	private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
@@ -27,7 +27,11 @@ public class SimulatorView extends JFrame {
         
 
         Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.NORTH);
+
+        contentPane.add(carParkView);
+        contentPane.setLayout(null);
+        carParkView.setBounds(500,0,800,500); 
+
         pack();
         
         
@@ -88,7 +92,11 @@ public class SimulatorView extends JFrame {
         numberOfOpenSpots++;
         return car;
     }
+
 // gives a free location depending on the car itself if it's an adhoc or passcar 
+
+
+
     public Location getFirstFreeLocation(Car car) {
     	
     	if(car.getHasToPay() == true) {

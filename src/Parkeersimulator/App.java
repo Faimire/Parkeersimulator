@@ -1,8 +1,26 @@
 package Parkeersimulator;
 
 import java.awt.Dimension;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.BoxLayout;
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.border.BevelBorder;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+>>>>>>> debugged_gui
 
 public class App {
 	
@@ -39,6 +57,12 @@ public class App {
 		frame.add(simulatorview.getContentPane());
 		frame.getContentPane().setPreferredSize(new Dimension(1980, 1080));
 		frame.pack();
+		frame.getContentPane().setLayout(null);
+		simulatorview = new SimulatorView(3, 6, 30);
+		frame.getContentPane().add(simulatorview.getRootPane());
+		frame.setSize(1300, 800);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
