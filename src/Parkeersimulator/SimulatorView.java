@@ -24,10 +24,7 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        
-
-        Container contentPane = getContentPane();
-        contentPane.add(carParkView, BorderLayout.NORTH);
+        add(carParkView);
         pack();
         
         
@@ -177,7 +174,7 @@ public class SimulatorView extends JFrame {
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
-            return new Dimension(1000, 800);
+            return new Dimension(1000, 1000);
         }
     
         /**

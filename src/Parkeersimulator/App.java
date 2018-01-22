@@ -1,6 +1,8 @@
 package Parkeersimulator;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.JFrame;
 
 public class App {
@@ -36,8 +38,9 @@ public class App {
 		frame.setBounds(100, 100, 450, 300);
 		simulatorview = new SimulatorView(3, 6, 30);
 		frame.add(simulatorview.getContentPane());
-		frame.getContentPane().setPreferredSize(new Dimension(1980, 1080));
 		frame.pack();
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
