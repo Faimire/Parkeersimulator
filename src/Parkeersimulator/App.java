@@ -48,13 +48,10 @@ public class App {
 	public void initialize() {
 		
 		frame = new JFrame();
-		frame.getContentPane().setLayout(new BorderLayout());
-		frame.setBounds(100, 100, 1000, 800);
+		frame.getContentPane().setLayout(null);
 		simulatorview = new SimulatorView(3, 6, 30);
-		frame.getContentPane().add(simulatorview.getRootPane(), BorderLayout.CENTER);
-		
-		frame.pack();
-		frame.setSize(1000, 800);
+		frame.getContentPane().add(simulatorview.getRootPane());
+		frame.setSize(1300, 800);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

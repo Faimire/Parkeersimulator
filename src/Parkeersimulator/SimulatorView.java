@@ -1,15 +1,10 @@
 package Parkeersimulator;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6914495190824551585L;
-	private CarParkView carParkView;
+    private CarParkView carParkView;
     private int numberOfFloors;
     private int numberOfRows;
     private int numberOfPlaces;
@@ -24,10 +19,14 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        add(carParkView);
+
+        Container contentPane = getContentPane();
+        contentPane.add(carParkView);
+        contentPane.setLayout(null);
+        carParkView.setBounds(500,0,800,500); 
         pack();
-        
-        
+        setVisible(true);
+
         updateView();
     }
 
@@ -85,7 +84,7 @@ public class SimulatorView extends JFrame {
         numberOfOpenSpots++;
         return car;
     }
-// gives a free location depending on the car itself if it's an adhoc or passcar 
+
     public Location getFirstFreeLocation(Car car) {
     	
     	if(car.getHasToPay() == true) {
@@ -156,11 +155,7 @@ public class SimulatorView extends JFrame {
     
     private class CarParkView extends JPanel {
         
-        /**
-		 * 
-		 */
-		private static final long serialVersionUID = -6763868542977448053L;
-		private Dimension size;
+        private Dimension size;
         private Image carParkImage;    
     
         /**
@@ -170,7 +165,12 @@ public class SimulatorView extends JFrame {
             size = new Dimension(0, 0);
         }
     
-
+        /**
+         * Overridden. Tell the GUI manager how big we would like to be.
+         */
+        public Dimension getPreferredSize() {
+            return new Dimension(800, 500);
+        }
     
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
@@ -223,8 +223,5 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
-
-    
-
 
 }
