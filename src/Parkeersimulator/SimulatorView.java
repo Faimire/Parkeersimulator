@@ -170,12 +170,7 @@ public class SimulatorView extends JFrame {
             size = new Dimension(0, 0);
         }
     
-        /**
-         * Overridden. Tell the GUI manager how big we would like to be.
-         */
-        public Dimension getPreferredSize() {
-            return new Dimension(1000, 500);
-        }
+
     
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
