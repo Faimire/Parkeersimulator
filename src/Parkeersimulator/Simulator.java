@@ -88,12 +88,12 @@ public class Simulator implements Runnable{
 			    }
 			});
 			while(started == false) {
-				simulatorView.button3.addActionListener( new ActionListener()
+				simulatorView.button4.addActionListener( new ActionListener()
 				{
 				    @Override
 				    public void actionPerformed(ActionEvent e)
 				    {
-				    started = true;
+
 				    }
 				});
 				simulatorView.button1.addActionListener( new ActionListener()

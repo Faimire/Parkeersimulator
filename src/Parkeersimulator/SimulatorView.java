@@ -15,7 +15,7 @@ public class SimulatorView extends JFrame {
     private int numberOfOpenSpots;
     private Car[][][] cars;
     public Container contentPane;
-    public JButton button1, button2, button3;
+    public JButton button1, button2, button3, button4;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -62,9 +62,12 @@ public class SimulatorView extends JFrame {
     	button1 = new JButton("START");
     	button2 = new JButton("PAUSE");
     	button3 = new JButton("START OVER");
+    	button4 = new JButton("+ 1");
     	contentPane.add(button1);
     	contentPane.add(button2);
     	contentPane.add(button3);
+    	contentPane.add(button4);
+    	button4.setBounds(500, 900, 150, 40);
     	button3.setBounds(100, 700, 273, 65);
         button2.setBounds(100, 800, 273, 65);
         button1.setBounds(100, 900, 273, 65);
