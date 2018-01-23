@@ -14,7 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 import javax.swing.JProgressBar;
 
-public class Simulator {
+public class Simulator implements Runnable{
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -44,7 +44,7 @@ public class Simulator {
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
     
-    private boolean started = true;// says if the application is started or not
+    public boolean started = true;// says if the application is started or not
 
     public Simulator() {
         entranceCarQueue = new CarQueue();
@@ -75,24 +75,38 @@ public class Simulator {
     
 
 	public void run() {
-	
-
-		while (setStarted(true)) {
+		
+		while (started == true) {
 			tick();
 			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
-			simulatorView.button1.addActionListener( new ActionListener()
+			simulatorView.button2.addActionListener( new ActionListener()
 			{
 			    @Override
 			    public void actionPerformed(ActionEvent e)
 			    {
-			        System.out.println("clicked");
+			    started = false;
 			    }
 			});
+			while(started == false) {
+				simulatorView.button1.addActionListener( new ActionListener()
+				{
+				    @Override
+				    public void actionPerformed(ActionEvent e)
+				    {
+				    started = true;
+				    }
+				});
+			}
+			
 
 		}
+		
+		    	
+		    
 	}
 
     private void tick() {
+    	
     	advanceTime();
     	handleExit();
     	updateViews();
@@ -103,6 +117,8 @@ public class Simulator {
             e.printStackTrace();
         }
     	handleEntrance();
+    	
+    	
     }
 
     private void advanceTime(){
