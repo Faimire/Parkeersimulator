@@ -1,6 +1,7 @@
 package Parkeersimulator;
 
 import java.awt.Dimension;
+
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,10 +26,12 @@ public class Simulator {
     private CarQueue exitCarQueue;
     private SimulatorView simulatorView;
     private JProgressBar progressBar1;
+    private JMenuBar menuBar;
 
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
+    private int f = 0;
 
     private int tickPause = 100;
 
@@ -49,12 +52,7 @@ public class Simulator {
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
-        simulatorView.button2.setBounds(100, 800, 273, 65);
-        simulatorView.button1.setBounds(100, 900, 273, 65);
-        simulatorView.setSize(1980,1080);
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        simulatorView.setLocation(dim.width/2-simulatorView.getSize().width/2, dim.height/2-simulatorView.getSize().height/2);
-		simulatorView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        settingSimulatorView();
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 1980, 21);
@@ -68,6 +66,13 @@ public class Simulator {
 		
 		
     }
+    public void settingSimulatorView() {
+        simulatorView.setSize(1980,1080);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        simulatorView.setLocation(dim.width/2-simulatorView.getSize().width/2, dim.height/2-simulatorView.getSize().height/2);
+		simulatorView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
 
 	public void run() {
 	
@@ -141,15 +146,35 @@ public class Simulator {
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);    	
     }
+    
+    private void countPass(Car car) {
+    	if(car.getHasToPay() == false) {
+    		f++;
+    	}
+    	
+    	if(hour == 12 && minute == 0) {
+    		System.out.println(f);
+    	}
+    }
 
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
+		Random random = new Random();
 		// Remove car from the front of the queue and assign to a parking space.
 		while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
 			Car car = queue.removeCar();
-			Location freeLocation = simulatorView.getFirstFreeLocation(car);
-			simulatorView.setCarAt(freeLocation, car);
-			i++;
+			int random1 = random.nextInt(4);
+			int random2 = random.nextInt(2);
+			if (random1 == 1 || random1 == 2 || random1 == 3 || random2 == 1) {
+				countPass(car);
+				Location freeLocation = simulatorView.getFirstFreeLocation(car);
+				simulatorView.setCarAt(freeLocation, car);
+				i++;
+			}
+
+			if (random1 == 0 && random2 == 0) {
+				i++;
+			}
 		}
 	}
     
