@@ -2,6 +2,8 @@ package Parkeersimulator;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -63,6 +65,8 @@ public class Simulator {
 		progressBar1.setMinimum(0);
 		progressBar1.setBounds(10, 32, 146, 14);
 		simulatorView.getContentPane().add(progressBar1);
+		
+		
     }
 
 	public void run() {
@@ -71,6 +75,14 @@ public class Simulator {
 		while (setStarted(true)) {
 			tick();
 			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
+			simulatorView.button1.addActionListener( new ActionListener()
+			{
+			    @Override
+			    public void actionPerformed(ActionEvent e)
+			    {
+			        System.out.println("clicked");
+			    }
+			});
 
 		}
 	}
