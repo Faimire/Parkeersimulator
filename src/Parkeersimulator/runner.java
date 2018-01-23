@@ -1,6 +1,6 @@
 package Parkeersimulator;
 
-public class Runner {
+public class runner {
 
 	public Simulator simulator;
 

@@ -24,7 +24,7 @@ public class Simulator implements Runnable{
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private SimulatorView simulatorView;
+    public SimulatorView simulatorView;
     private JProgressBar progressBar1;
     private JMenuBar menuBar;
 
@@ -52,6 +52,8 @@ public class Simulator implements Runnable{
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
+        Controller controller = new Controller(simulatorView);
+        simulatorView.pack();
         settingSimulatorView();
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -79,31 +81,7 @@ public class Simulator implements Runnable{
 		while (started == true) {
 			tick();
 			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
-			simulatorView.button2.addActionListener( new ActionListener()
-			{
-			    @Override
-			    public void actionPerformed(ActionEvent e)
-			    {
-			    started = false;
-			    }
-			});
-			while(started == false) {
-				simulatorView.button4.addActionListener( new ActionListener()
-				{
-				    @Override
-				    public void actionPerformed(ActionEvent e)
-				    {
-
-				    }
-				});
-				simulatorView.button1.addActionListener( new ActionListener()
-				{
-				    @Override
-				    public void actionPerformed(ActionEvent e)
-				    {
-				    started = true;
-				    }
-				});
+			
 				
 			}
 			
@@ -112,7 +90,7 @@ public class Simulator implements Runnable{
 		
 		    	
 		    
-	}
+	
 
     private void tick() {
     	

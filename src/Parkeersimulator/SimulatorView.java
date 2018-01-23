@@ -31,7 +31,6 @@ public class SimulatorView extends JFrame {
         contentPane.add(carParkView);
         contentPane.setLayout(null);
         carParkView.setBounds(550,50,850,500); 
-        Buttonsini();
         pack();
         setVisible(true);
 
