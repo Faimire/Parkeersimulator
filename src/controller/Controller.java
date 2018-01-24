@@ -1,8 +1,11 @@
-package Parkeersimulator;
+package controller;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import controller.*;
+import logic.Model;
+import view.SimulatorView;
 
 import javax.swing.JButton;
 import javax.swing.JMenuBar;

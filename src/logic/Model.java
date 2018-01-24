@@ -1,4 +1,6 @@
-package Parkeersimulator;
+package logic;
+
+import main.Simulator;
 
 public class Model {
 	

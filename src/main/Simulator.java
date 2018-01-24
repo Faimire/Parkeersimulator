@@ -1,4 +1,4 @@
-package Parkeersimulator;
+package main;
 
 import java.awt.Dimension;
 
@@ -12,6 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
+
+import controller.Controller;
+import logic.AdHocCar;
+import logic.Car;
+import logic.CarQueue;
+import logic.Location;
+import logic.ParkingPassCar;
+import view.SimulatorView;
+
 import javax.swing.JProgressBar;
 
 public class Simulator implements Runnable{
