@@ -13,13 +13,13 @@ public class Model {
 	}
 	
 	public void faster() {
-		if(Simulator.tickPause < 1000) {
+		if(Simulator.tickPause > 20) {
 		Simulator.tickPause -= 10;
 		}
 	}
 	
 	public void slower() {
-		if(Simulator.tickPause > 10) {
+		if(Simulator.tickPause < 1000) {
 		Simulator.tickPause += 10;
 		}
 	}
