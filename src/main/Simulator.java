@@ -61,16 +61,9 @@ public class Simulator implements Runnable{
         simulatorView.pack();
         settingSimulatorView();
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 1980, 21);
-		simulatorView.getContentPane().add(menuBar);
 		
-		JProgressBar progressBar1 = new JProgressBar();
-		progressBar1.setMaximum(168);
-		progressBar1.setMinimum(0);
-		progressBar1.setBounds(10, 32, 146, 14);
-		simulatorView.getContentPane().add(progressBar1);
 		
+
 		
     }
     public void settingSimulatorView() {
