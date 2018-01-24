@@ -2,8 +2,7 @@ package view;
 
 import javax.swing.*;
 
-import logic.Car;
-import logic.Location;
+import logic.*;
 
 import java.awt.*;
 

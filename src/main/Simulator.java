@@ -14,12 +14,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 
 import controller.Controller;
-import logic.AdHocCar;
-import logic.Car;
-import logic.CarQueue;
-import logic.Location;
-import logic.ParkingPassCar;
-import view.SimulatorView;
+import logic.*;
+import view.*;
 
 import javax.swing.JProgressBar;
 
