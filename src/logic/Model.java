@@ -16,11 +16,11 @@ public class Model {
 	}
 	
 	public void faster() {
-		if(Simulator.tickPause > 10) {
+		if(Simulator.tickPause > 0) {
 		Simulator.tickPause -= 10;
 		}
 		
-		if(Simulator.tickPause == 10) {
+		if(Simulator.tickPause == 0) {
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame,
 				    "can't go faster.");
