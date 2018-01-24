@@ -42,8 +42,8 @@ public class SimulatorView extends JFrame {
         contentPane.setLayout(null);
         clock.setBounds(100,440,600,300);
         carParkView.setBounds(100,75,850,500); 
-        pack();
         setVisible(true);
+        pack();
 
         updateView();
     }

@@ -61,10 +61,7 @@ public class Simulator implements Runnable{
         simulatorView.pack();
         settingSimulatorView();
 		
-		
-		
-
-		
+			
     }
     public void settingSimulatorView() {
         simulatorView.setSize(1980,1080);
