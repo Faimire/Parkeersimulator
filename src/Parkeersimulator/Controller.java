@@ -5,11 +5,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JMenuBar;
 
 public class Controller implements ActionListener{
     public JButton button1, button2, button3, button4;
     public SimulatorView view;
-    public Model model;
+    public static Model model;
 
 	public Controller(SimulatorView view) {
 		model = new Model();
@@ -29,12 +30,17 @@ public class Controller implements ActionListener{
     	button3.setBounds(100, 700, 273, 65);
         button2.setBounds(100, 800, 273, 65);
         button1.setBounds(100, 900, 273, 65);
+        JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 1980, 21);
+		view.getContentPane().add(menuBar);
 		
 	}
 	
 	public Container getContentPaneSIM() {
 		return view.contentPane;
 	}
+	
+
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == button1) {
 			model.start();
