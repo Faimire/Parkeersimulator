@@ -1,5 +1,8 @@
 package logic;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import main.Simulator;
 
 public class Model {
@@ -13,15 +16,20 @@ public class Model {
 	}
 	
 	public void faster() {
-		if(Simulator.tickPause > 20) {
+		if(Simulator.tickPause > 10) {
 		Simulator.tickPause -= 10;
+		}
+		
+		if(Simulator.tickPause == 10) {
+			JFrame frame = new JFrame();
+			JOptionPane.showMessageDialog(frame,
+				    "can't go faster.");
 		}
 	}
 	
 	public void slower() {
-		if(Simulator.tickPause < 1000) {
 		Simulator.tickPause += 10;
-		}
+		
 	}
 	
 	
