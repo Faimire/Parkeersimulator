@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
 public class Controller implements ActionListener{
-    public JButton button1, button2, button3, button4;
+    public JButton button1, button2, button3, button4, button5;
     public SimulatorView view;
     public static Model model;
 
@@ -25,11 +25,14 @@ public class Controller implements ActionListener{
     	button3.addActionListener(this);
     	button4 = new JButton("+ 1");
     	button4.addActionListener(this);
+    	button5 = new JButton("- 1");
     	view.add(button1);
     	view.add(button2);
     	view.add(button3);
     	view.add(button4);
-    	button4.setBounds(500, 900, 150, 40);
+    	view.add(button5);
+    	button5.setBounds(500, 900, 150, 40);
+    	button4.setBounds(700, 900, 150, 40);
     	button3.setBounds(100, 700, 273, 65);
         button2.setBounds(100, 800, 273, 65);
         button1.setBounds(100, 900, 273, 65);
