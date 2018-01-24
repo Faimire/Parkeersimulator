@@ -44,7 +44,7 @@ public class Simulator implements Runnable{
     int paymentSpeed = 7; // number of cars that can pay per minute
     int exitSpeed = 5; // number of cars that can leave per minute
     
-    public boolean started = true;// says if the application is started or not
+    public static boolean started = true;// says if the application is started or not
 
     public Simulator() {
         entranceCarQueue = new CarQueue();
