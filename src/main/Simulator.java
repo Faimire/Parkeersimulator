@@ -82,6 +82,8 @@ public class Simulator implements Runnable{
 			while(started == false) {
 				System.out.println("stopped");
 			}
+			SimulatorView.clock.setText("Minutes " + String.valueOf(minute) + ":" +
+					 " Hours " + String.valueOf(hour) + ":" + " Days " + String.valueOf(day));
 			
 				
 			}

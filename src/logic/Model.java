@@ -32,6 +32,10 @@ public class Model {
 		
 	}
 	
+	public void startover() {
+		
+	}
+	
 	
 
 }

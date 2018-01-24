@@ -19,6 +19,7 @@ public class SimulatorView extends JFrame {
     private Car[][][] cars;
     public Container contentPane;
     public JButton button1, button2, button3, button4;
+    public static JLabel clock;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -29,10 +30,14 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-
+        clock = new JLabel("DD:MM:YY");
+        Font clockfont = clock.getFont();
+        clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
         contentPane = getContentPane();
+        contentPane.add(clock);
         contentPane.add(carParkView);
         contentPane.setLayout(null);
+        clock.setBounds(100,440,600,300);
         carParkView.setBounds(100,75,850,500); 
         pack();
         setVisible(true);
@@ -60,20 +65,7 @@ public class SimulatorView extends JFrame {
     	return numberOfOpenSpots;
     }
     
-    public void Buttonsini() {
-    	button1 = new JButton("START");
-    	button2 = new JButton("PAUSE");
-    	button3 = new JButton("START OVER");
-    	button4 = new JButton("+ 1");
-    	contentPane.add(button1);
-    	contentPane.add(button2);
-    	contentPane.add(button3);
-    	contentPane.add(button4);
-    	button4.setBounds(500, 900, 150, 40);
-    	button3.setBounds(100, 700, 273, 65);
-        button2.setBounds(100, 800, 273, 65);
-        button1.setBounds(100, 900, 273, 65);
-    }
+
     
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {

@@ -1,9 +1,11 @@
 package controller;
 
 import java.awt.Container;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import logic.Model;
+import main.Simulator;
 import view.SimulatorView;
 
 import javax.swing.JButton;
@@ -55,9 +57,6 @@ public class Controller implements ActionListener{
 		
 	}
 	
-	public Container getContentPaneSIM() {
-		return view.contentPane;
-	}
 	
 // give the actions that the buttons are performed a method.
 	public void actionPerformed(ActionEvent e) {

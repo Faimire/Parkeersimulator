@@ -10,9 +10,7 @@ public class piechartstart {
 		frame.add(chart.getContentPane());
 		frame.pack();
 		frame.setVisible(true);
-		for(int i = 0; i <= 1000; i++) {
-			chart.add(comp)
-		}
+
 	}
 
 }
