@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 import logic.*;
 
@@ -20,6 +21,7 @@ public class SimulatorView extends JFrame {
     public Container contentPane;
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
+    public Border loweredbevel;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -30,9 +32,10 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        clock = new JLabel("DD:MM:YY");
-        Font clockfont = clock.getFont();
-        clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
+        loweredbevel = BorderFactory.createLoweredBevelBorder();
+        
+        
+        clock();
         contentPane = getContentPane();
         contentPane.add(clock);
         contentPane.add(carParkView);
@@ -43,6 +46,12 @@ public class SimulatorView extends JFrame {
         setVisible(true);
 
         updateView();
+    }
+    
+    public void clock() {
+        clock = new JLabel("DD:MM:YY");
+        Font clockfont = clock.getFont();
+        clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
     }
 
     public void updateView() {
