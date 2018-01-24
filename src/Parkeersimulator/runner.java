@@ -1,6 +1,6 @@
 package Parkeersimulator;
 
-public class Runner {
+public class runner {
 
 	public static void main(String[] args) {
 		Simulator simulator = new Simulator();
