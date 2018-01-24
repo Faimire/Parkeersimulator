@@ -15,7 +15,9 @@ public class Controller implements ActionListener{
     public static Model model;
 
 	public Controller(SimulatorView view) {
+		//Initializing the model
 		model = new Model();
+		//making the buttons
     	button1 = new JButton("START");
     	button1.addActionListener(this);
     	button2 = new JButton("PAUSE");
@@ -30,6 +32,7 @@ public class Controller implements ActionListener{
     	button6.addActionListener(this);
     	button7 = new JButton("SLOWER");
     	button7.addActionListener(this);
+    	// added to SimulatorView
     	view.add(button1);
     	view.add(button2);
     	view.add(button3);
@@ -37,6 +40,7 @@ public class Controller implements ActionListener{
     	view.add(button5);
     	view.add(button6);
     	view.add(button7);
+    	//settings in the JFrame
     	button7.setBounds(700, 700, 150, 40);
     	button6.setBounds(500, 700, 150, 40);
     	button5.setBounds(500, 900, 150, 40);
@@ -44,6 +48,7 @@ public class Controller implements ActionListener{
     	button3.setBounds(100, 700, 273, 65);
         button2.setBounds(100, 800, 273, 65);
         button1.setBounds(100, 900, 273, 65);
+        //Menubar for style
         JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 1980, 21);
 		view.getContentPane().add(menuBar);
@@ -54,7 +59,7 @@ public class Controller implements ActionListener{
 		return view.contentPane;
 	}
 	
-
+// give the actions that the buttons are performed a method.
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == button1) {
 			model.start();
