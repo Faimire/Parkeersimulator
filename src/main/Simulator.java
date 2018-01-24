@@ -38,7 +38,7 @@ public class Simulator implements Runnable{
     private int minute = 0;
     private int f = 0;
 
-    private int tickPause = 100;
+    public static int tickPause = 100;
 
     int weekDayArrivals= 100; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour

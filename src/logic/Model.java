@@ -12,5 +12,18 @@ public class Model {
 		Simulator.started = false;
 	}
 	
+	public void faster() {
+		if(Simulator.tickPause < 1000) {
+		Simulator.tickPause -= 10;
+		}
+	}
+	
+	public void slower() {
+		if(Simulator.tickPause > 10) {
+		Simulator.tickPause += 10;
+		}
+	}
+	
+	
 
 }
