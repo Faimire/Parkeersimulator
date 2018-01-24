@@ -81,6 +81,9 @@ public class Simulator implements Runnable{
 		while (started == true) {
 			tick();
 			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
+			while(started == false) {
+				System.out.println("stopped");
+			}
 			
 				
 			}
