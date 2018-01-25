@@ -7,7 +7,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 
 import logic.*;
-import main.Simulator;
+import main.*;
 
 import java.awt.*;
 

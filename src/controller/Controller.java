@@ -4,9 +4,9 @@ import java.awt.Container;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import logic.Model;
-import main.Simulator;
-import view.SimulatorView;
+import logic.*;
+import main.*;
+import view.*;
 
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
