@@ -6,7 +6,9 @@ public class Runner {
 
 	public static void main(String[] args) {
 		Simulator simulator = new Simulator();
-        simulator.run();
+        simulator.start();
+        PiechartThread piechart = new PiechartThread();
+        piechart.start();
 	}
 
 }

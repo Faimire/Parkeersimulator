@@ -32,6 +32,7 @@ public class Simulator implements Runnable{
     public SimulatorView simulatorView;
     private JProgressBar progressBar1;
     private JMenuBar menuBar;
+    private Thread sim;
 
     private int day = 0; //gives the day the simulator is on
     private int hour = 0; //gives the hour the simulator is on
@@ -63,6 +64,13 @@ public class Simulator implements Runnable{
 		
 			
     }
+    
+    public void start() {
+    	if(sim == null) {
+    		sim = new Thread (this, "simulator");
+    		sim.start();
+    	}
+    }
     //setups the simulatorView
     public void settingSimulatorView() {
         simulatorView.setSize(1980,1080);
@@ -81,7 +89,6 @@ public class Simulator implements Runnable{
 			while(started == false) {
 				System.out.println("stopped");
 			}
-			SimulatorView.updatePie();
 
 							
 			}
@@ -92,7 +99,7 @@ public class Simulator implements Runnable{
 		    	
 		    
 	
-// updates the clock and handles the Simulator
+    //updates the clock and handles the Simulator
     private void tick() {
 		SimulatorView.clock.setText("  Minutes " + String.valueOf(minute) + ":" +
 				 " Hours " + String.valueOf(hour) + ":" + " Days " + String.valueOf(day));
