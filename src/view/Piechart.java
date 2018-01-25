@@ -30,7 +30,7 @@ public class Piechart {
    
    public static JFreeChart createChart( PieDataset dataset ) {
       JFreeChart chart = ChartFactory.createPieChart(      
-         "Queue",   // chart title 
+         "Garage subs vs scrubs",   // chart title 
          dataset,          // data    
          true,             // include legend   
          true, 

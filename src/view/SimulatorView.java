@@ -38,7 +38,7 @@ public class SimulatorView extends JFrame {
         
         carParkView = new CarParkView();
         panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
-             
+//setups the ContentPane for views             
         clock();
         contentPane = getContentPane();
         addToPane();
@@ -49,19 +49,19 @@ public class SimulatorView extends JFrame {
 
         updateView();
     }
-    
+    //adds the components to the pane
     public void addToPane() {
     	contentPane.add(clock);
         contentPane.add(carParkView);
         contentPane.add(panel);
     }
-    
+    // setups the boundaries of the components added to contentPane
     public void setupBounds() {
     	clock.setBounds(100,600,230,50);
         carParkView.setBounds(100,75,850,500); 
         panel.setBounds(1050, 75, 800, 400);
     }
-    
+    //updates the data on the chart and removes the old chart for less memory usage
     public static void updatePie() {
     	contentPane.remove(panel);
     	panel = null;
@@ -142,6 +142,7 @@ public class SimulatorView extends JFrame {
         return car;
     }
 
+	// gives cars the place they need park
 	public Location getFirstFreeLocation(Car car) {
 
 		if (car.getHasToPay() == true) {
