@@ -43,7 +43,7 @@ public class Piechart {
    }
    
    public static JPanel createDemoPanel( ) {
-      JFreeChart chart = createChart(createDataset(200) );  
+      JFreeChart chart = createChart(createDataset(200), "demopanel" );  
       return new ChartPanel( chart ); 
    }
 
