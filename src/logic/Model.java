@@ -3,6 +3,7 @@ package logic;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.PiechartThread;
 import main.Simulator;
 
 public class Model {
@@ -36,6 +37,28 @@ public class Model {
 		
 	}
 	
+	public void nextchart() {
+		
+		if(PiechartThread.whatchart < 2) {
+		PiechartThread.whatchart += 1;
+		}
+		
+		else{
+	    PiechartThread.whatchart = 0;	
+		}
+		
+	}
+	
+	public void previouschart() {
+		
+		if(PiechartThread.whatchart > 0) {
+		PiechartThread.whatchart -= 1;
+		}
+		
+		else{
+		PiechartThread.whatchart = 2;
+		}
+	}
 	
 
 }

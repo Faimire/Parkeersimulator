@@ -37,7 +37,7 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+        panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
         //setups the ContentPane for views             
         clock();
         contentPane = getContentPane();
@@ -65,10 +65,26 @@ public class SimulatorView extends JFrame {
     public static void updatePie() {
     	contentPane.remove(panel);
     	panel = null;
-    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
     	contentPane.add(panel);	
     	panel.setBounds(1050, 75, 800, 400);
     	
+    }
+    
+    public static void updatePie2() {
+    	contentPane.remove(panel);
+    	panel = null;
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(200), "chart2"));
+    	contentPane.add(panel);	
+    	panel.setBounds(1050, 75, 800, 400);
+    }
+    
+    public static void updatePie3() {
+    	contentPane.remove(panel);
+    	panel = null;
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(500), "chart3"));
+    	contentPane.add(panel);	
+    	panel.setBounds(1050, 75, 800, 400);
     }
     // setups the clock label for view
     public void clock() {

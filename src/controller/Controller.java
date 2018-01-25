@@ -12,7 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
 public class Controller implements ActionListener{
-    public JButton button1, button2, button3, button4, button5, button6, button7;
+    public JButton button1, button2, button3, button4, button5, button6, button7,
+    piebutton1, piebutton2;
     public SimulatorView view;
     public static Model model;
 
@@ -46,6 +47,11 @@ public class Controller implements ActionListener{
     	button6.addActionListener(this);
     	button7 = new JButton("SLOWER");
     	button7.addActionListener(this);
+    	piebutton1 = new JButton("previous");
+    	piebutton1.addActionListener(this);
+    	piebutton2 = new JButton("next");
+    	piebutton2.addActionListener(this);
+    	
 	}
 	public void addButtons(SimulatorView view) {
     	view.add(button1);
@@ -55,9 +61,13 @@ public class Controller implements ActionListener{
     	view.add(button5);
     	view.add(button6);
     	view.add(button7);
+    	view.add(piebutton1);
+    	view.add(piebutton2);
 	}
 	
 	public void setupButtons() {
+		piebutton2.setBounds(1500, 500, 150, 40);
+		piebutton1.setBounds(1200, 500, 150, 40);
     	button7.setBounds(700, 700, 150, 40);
     	button6.setBounds(500, 700, 150, 40);
     	button5.setBounds(500, 900, 150, 40);
@@ -82,6 +92,14 @@ public class Controller implements ActionListener{
 		}
 		if(e.getSource() == button7) {
 			model.slower();
+		}
+		
+		if(e.getSource() == piebutton1) {
+			model.previouschart();
+		}
+		
+        if(e.getSource() == piebutton2) {
+			model.nextchart();
 		}
 	}
 

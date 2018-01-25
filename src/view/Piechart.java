@@ -22,18 +22,17 @@ public class Piechart {
    
 
    
-   public static PieDataset createDataset( ) {
-	  Random random = new Random();
+   public static PieDataset createDataset(int i) {
       DefaultPieDataset dataset = new DefaultPieDataset( );
       dataset.setValue( "non-subscription " + String.valueOf(SimulatorView.red) , new Integer(SimulatorView.red));  
       dataset.setValue( "subsription " + String.valueOf(SimulatorView.blue) , new Integer(SimulatorView.blue) );
-      dataset.setValue( "open-space " + String.valueOf(SimulatorView.white), new Integer(SimulatorView.white));
+      dataset.setValue( "open-space " + String.valueOf(SimulatorView.white), new Integer(SimulatorView.white + i));
       return dataset;         
    }
    
-   public static JFreeChart createChart( PieDataset dataset ) {
+   public static JFreeChart createChart( PieDataset dataset, String name ) {
       JFreeChart chart = ChartFactory.createRingChart(    
-         "Garage subs vs scrubs",   // chart title 
+         name,   // chart title 
          dataset,          // data    
          true,             // include legend   
          true, 
@@ -44,7 +43,7 @@ public class Piechart {
    }
    
    public static JPanel createDemoPanel( ) {
-      JFreeChart chart = createChart(createDataset( ) );  
+      JFreeChart chart = createChart(createDataset(200) );  
       return new ChartPanel( chart ); 
    }
 
