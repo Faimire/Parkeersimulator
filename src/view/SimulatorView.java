@@ -26,6 +26,7 @@ public class SimulatorView extends JFrame {
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
     public static ChartPanel panel;
+    public static int blue = 0, red = 0;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -36,7 +37,7 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        ChartPanel panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+        panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
              
         clock();
         contentPane = getContentPane();
@@ -54,10 +55,12 @@ public class SimulatorView extends JFrame {
     }
     
     public static void updatePie() {
+    	contentPane.remove(panel);
     	panel = null;
-    	ChartPanel panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
     	contentPane.add(panel);	
     	panel.setBounds(1050, 75, 800, 400);
+    	
     }
     
     public void clock() {
@@ -127,6 +130,7 @@ public class SimulatorView extends JFrame {
     public Location getFirstFreeLocation(Car car) {
     	
     	if(car.getHasToPay() == true) {
+    		red++;
         for (int floor = 1; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -136,9 +140,12 @@ public class SimulatorView extends JFrame {
                     }
                     }
                 }
+            
             }
+        
         }
     	if(car.getHasToPay() == false) {
+    		blue++;
             for (int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
                     for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -149,6 +156,7 @@ public class SimulatorView extends JFrame {
                         }
                     }
                 }
+            
             }
         return null;
     }

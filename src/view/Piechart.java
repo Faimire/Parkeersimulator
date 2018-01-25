@@ -23,9 +23,8 @@ public class Piechart {
    public static PieDataset createDataset( ) {
 	  Random random = new Random();
       DefaultPieDataset dataset = new DefaultPieDataset( );
-      dataset.setValue( "non-subscription" , new Integer(random.nextInt(10000)) );  
-      dataset.setValue( "subsription" , new Integer(random.nextInt(10000)) );
-      dataset.setValue( "merkel" , new Integer(random.nextInt(10000)) );   
+      dataset.setValue( "non-subscription" , new Integer(SimulatorView.red));  
+      dataset.setValue( "subsription" , new Integer(SimulatorView.blue) );
       return dataset;         
    }
    
