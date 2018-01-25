@@ -26,7 +26,24 @@ public class PiechartThread implements Runnable{
 				 e.printStackTrace();
 			 }
 			 while(Simulator.started == false) {
-				 System.out.println("piechart stopped");
+				 if(whatchart == 0) {
+					 SimulatorView.updatePie();
+					 }
+					 
+					 if(whatchart == 1) {
+					 SimulatorView.updatePie2();	 
+					 }
+					 
+					 if(whatchart == 2) {
+				     SimulatorView.updatePie3();	 
+					 }
+					 
+					 try {
+						 Thread.sleep(1);
+					 }
+					 catch(InterruptedException e){
+						 e.printStackTrace();
+					 }
 			 }
 		 }
 	 }
