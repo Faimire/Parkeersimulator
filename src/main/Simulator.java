@@ -1,14 +1,31 @@
-package Parkeersimulator;
+package main;
 
 import java.awt.Dimension;
+
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
 
+import controller.Controller;
+import logic.*;
+import view.*;
+
+import javax.swing.JProgressBar;
+
+<<<<<<< HEAD:src/Parkeersimulator/Simulator.java
 
 public class Simulator {
+=======
+public class Simulator implements Runnable{
+>>>>>>> debugged_gui:src/main/Simulator.java
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
@@ -111,24 +128,27 @@ public class Simulator {
     private CarQueue entrancePassQueue;
     private CarQueue paymentCarQueue;
     private CarQueue exitCarQueue;
-    private SimulatorView simulatorView;
+    public SimulatorView simulatorView;
+    private JProgressBar progressBar1;
+    private JMenuBar menuBar;
 
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
+    private int f = 0;
 
-    private int tickPause = 100;
+    public static int tickPause = 100;
 
-    int weekDayArrivals= 100; // average number of arriving cars per hour
+    int weekDayArrivals= 300; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 50; // average number of arriving cars per hour
-    int weekendPassArrivals = 5; // average number of arriving cars per hour
+    int weekDayPassArrivals= 200; // average number of arriving cars per hour
+    int weekendPassArrivals = 50; // average number of arriving cars per hour
 
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
+    int enterSpeed = 1; // number of cars that can enter per minute
+    int paymentSpeed = 3; // number of cars that can pay per minute
+    int exitSpeed = 1; // number of cars that can leave per minute
     
-    private boolean started = true;// says if the application is started or not
+    public static boolean started = true;// says if the application is started or not
 
     public Simulator() {
         entranceCarQueue = new CarQueue();
@@ -136,21 +156,44 @@ public class Simulator {
         paymentCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         simulatorView = new SimulatorView(3, 6, 30);
+        Controller controller = new Controller(simulatorView);
+        simulatorView.pack();
+        settingSimulatorView();
+		
+			
+    }
+    public void settingSimulatorView() {
         simulatorView.setSize(1980,1080);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         simulatorView.setLocation(dim.width/2-simulatorView.getSize().width/2, dim.height/2-simulatorView.getSize().height/2);
 		simulatorView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    
 
-    public void run() {
+	public void run() {
+		
+	
+		while (started == true) {
+			tick();
+			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
+			while(started == false) {
+				System.out.println("stopped");
+			}
+			SimulatorView.updatePie();
 
-        while (setStarted(true)) {
-            tick();
-            System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
-        }
-    }
+							
+			}
+			
+
+		}
+		
+		    	
+		    
+	
 
     private void tick() {
+		SimulatorView.clock.setText("  Minutes " + String.valueOf(minute) + ":" +
+				 " Hours " + String.valueOf(hour) + ":" + " Days " + String.valueOf(day));
     	advanceTime();
     	handleExit();
     	updateViews();
@@ -161,6 +204,8 @@ public class Simulator {
             e.printStackTrace();
         }
     	handleEntrance();
+    	
+    	
     }
 
     private void advanceTime(){
@@ -204,16 +249,36 @@ public class Simulator {
     	numberOfCars=getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
         addArrivingCars(numberOfCars, PASS);    	
     }
+    
+    private void countPass(Car car) {
+    	if(car.getHasToPay() == false) {
+    		f++;
+    	}
+    	
+    	if(hour == 12 && minute == 0) {
+    		System.out.println(f);
+    	}
+    }
 
 
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
+		Random random = new Random();
 		// Remove car from the front of the queue and assign to a parking space.
 		while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
 			Car car = queue.removeCar();
-			Location freeLocation = simulatorView.getFirstFreeLocation(car);
-			simulatorView.setCarAt(freeLocation, car);
-			i++;
+			int random1 = random.nextInt(4);
+			int random2 = random.nextInt(2);
+			if (random1 == 1 || random1 == 2 || random1 == 3 || random2 == 1) {
+				countPass(car);
+				Location freeLocation = simulatorView.getFirstFreeLocation(car);
+				simulatorView.setCarAt(freeLocation, car);
+				i++;
+			}
+
+			if (random1 == 0 && random2 == 0) {
+				i++;
+			}
 		}
 	}
 
@@ -373,6 +438,10 @@ public class Simulator {
         this.started = started;
         return started;
     }
+<<<<<<< HEAD:src/Parkeersimulator/Simulator.java
 
 
+=======
+    
+>>>>>>> debugged_gui:src/main/Simulator.java
 }

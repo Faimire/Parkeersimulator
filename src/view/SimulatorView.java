@@ -1,6 +1,14 @@
-package Parkeersimulator;
+package view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+
+import logic.*;
+import main.*;
+
 import java.awt.*;
 
 public class SimulatorView extends JFrame {
@@ -15,8 +23,14 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
+    public static Container contentPane;
+    public JButton button1, button2, button3, button4;
+    public static JLabel clock;
+    public static ChartPanel panel;
+    public static int blue = 0, red = 0;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    	getContentPane().setBackground(SystemColor.inactiveCaption);
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
@@ -24,18 +38,51 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
+<<<<<<< HEAD:src/Parkeersimulator/SimulatorView.java
         
 
         Container contentPane = getContentPane();
 
+=======
+        panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+             
+        clock();
+        contentPane = getContentPane();
+        contentPane.add(clock);
+>>>>>>> debugged_gui:src/view/SimulatorView.java
         contentPane.add(carParkView);
+        contentPane.add(panel);
         contentPane.setLayout(null);
+<<<<<<< HEAD:src/Parkeersimulator/SimulatorView.java
         carParkView.setBounds(500,0,800,500); 
+=======
+        clock.setBounds(100,600,200,50);
+        carParkView.setBounds(100,75,850,500); 
+        panel.setBounds(1050, 75, 800, 400);
+        setVisible(true);
+        pack();
+>>>>>>> debugged_gui:src/view/SimulatorView.java
 
         pack();
         
         
         updateView();
+    }
+    
+    public static void updatePie() {
+    	contentPane.remove(panel);
+    	panel = null;
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+    	contentPane.add(panel);	
+    	panel.setBounds(1050, 75, 800, 400);
+    	
+    }
+    
+    public void clock() {
+        clock = new JLabel("DD:MM:YY");
+        clock.setOpaque(true);
+        Font clockfont = clock.getFont();
+        clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
     }
 
     public void updateView() {
@@ -57,6 +104,8 @@ public class SimulatorView extends JFrame {
     public int getNumberOfOpenSpots(){
     	return numberOfOpenSpots;
     }
+    
+
     
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
@@ -100,6 +149,7 @@ public class SimulatorView extends JFrame {
     public Location getFirstFreeLocation(Car car) {
     	
     	if(car.getHasToPay() == true) {
+    		red++;
         for (int floor = 1; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -109,9 +159,12 @@ public class SimulatorView extends JFrame {
                     }
                     }
                 }
+            
             }
+        
         }
     	if(car.getHasToPay() == false) {
+    		blue++;
             for (int floor = 0; floor < getNumberOfFloors(); floor++) {
                 for (int row = 0; row < getNumberOfRows(); row++) {
                     for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -122,6 +175,7 @@ public class SimulatorView extends JFrame {
                         }
                     }
                 }
+            
             }
         return null;
     }
@@ -181,12 +235,15 @@ public class SimulatorView extends JFrame {
             size = new Dimension(0, 0);
         }
     
+<<<<<<< HEAD:src/Parkeersimulator/SimulatorView.java
         /**
          * Overridden. Tell the GUI manager how big we would like to be.
          */
         public Dimension getPreferredSize() {
             return new Dimension(1000, 800);
         }
+=======
+>>>>>>> debugged_gui:src/view/SimulatorView.java
     
         /**
          * Overriden. The car park view component needs to be redisplayed. Copy the
@@ -239,8 +296,11 @@ public class SimulatorView extends JFrame {
                     10 - 1); // TODO use dynamic size or constants
         }
     }
+<<<<<<< HEAD:src/Parkeersimulator/SimulatorView.java
 
     
 
 
+=======
+>>>>>>> debugged_gui:src/view/SimulatorView.java
 }
