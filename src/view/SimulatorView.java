@@ -40,7 +40,7 @@ public class SimulatorView extends JFrame {
         contentPane.add(clock);
         contentPane.add(carParkView);
         contentPane.setLayout(null);
-        clock.setBounds(100,440,600,300);
+        clock.setBounds(100,600,200,50);
         carParkView.setBounds(100,75,850,500); 
         setVisible(true);
         pack();
@@ -50,6 +50,7 @@ public class SimulatorView extends JFrame {
     
     public void clock() {
         clock = new JLabel("DD:MM:YY");
+        clock.setOpaque(true);
         Font clockfont = clock.getFont();
         clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
     }
