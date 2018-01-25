@@ -48,6 +48,7 @@ public class SimulatorView extends JFrame {
              
         clock();
         contentPane = getContentPane();
+<<<<<<< HEAD
         contentPane.add(clock);
 >>>>>>> debugged_gui:src/view/SimulatorView.java
         contentPane.add(carParkView);
@@ -59,6 +60,11 @@ public class SimulatorView extends JFrame {
         clock.setBounds(100,600,200,50);
         carParkView.setBounds(100,75,850,500); 
         panel.setBounds(1050, 75, 800, 400);
+=======
+        addToPane();
+        contentPane.setLayout(null);
+        setupBounds();
+>>>>>>> debugged_gui
         setVisible(true);
         pack();
 >>>>>>> debugged_gui:src/view/SimulatorView.java
@@ -69,6 +75,18 @@ public class SimulatorView extends JFrame {
         updateView();
     }
     
+    public void addToPane() {
+    	contentPane.add(clock);
+        contentPane.add(carParkView);
+        contentPane.add(panel);
+    }
+    
+    public void setupBounds() {
+    	clock.setBounds(100,600,230,50);
+        carParkView.setBounds(100,75,850,500); 
+        panel.setBounds(1050, 75, 800, 400);
+    }
+    
     public static void updatePie() {
     	contentPane.remove(panel);
     	panel = null;
@@ -77,7 +95,7 @@ public class SimulatorView extends JFrame {
     	panel.setBounds(1050, 75, 800, 400);
     	
     }
-    
+    // setups the clock label for view
     public void clock() {
         clock = new JLabel("DD:MM:YY");
         clock.setOpaque(true);
@@ -139,9 +157,17 @@ public class SimulatorView extends JFrame {
         cars[location.getFloor()][location.getRow()][location.getPlace()] = null;
         car.setLocation(null);
         numberOfOpenSpots++;
+		// sets value of the amount red to blue cars
+        if(car.getHasToPay() == true) {
+        	red--;
+        }
+        if(car.getHasToPay() == false) {
+           blue--;
+        }
         return car;
     }
 
+<<<<<<< HEAD
 // gives a free location depending on the car itself if it's an adhoc or passcar 
 
 
@@ -179,6 +205,43 @@ public class SimulatorView extends JFrame {
             }
         return null;
     }
+=======
+	public Location getFirstFreeLocation(Car car) {
+
+		if (car.getHasToPay() == true) {
+			 // sets value of the amount red to blue cars
+			red++;
+			for (int floor = 1; floor < getNumberOfFloors(); floor++) {
+				for (int row = 0; row < getNumberOfRows(); row++) {
+					for (int place = 0; place < getNumberOfPlaces(); place++) {
+						Location location = new Location(floor, row, place);
+						if (getCarAt(location) == null) {
+							return location;
+						}
+					}
+				}
+
+			}
+
+		}
+		if (car.getHasToPay() == false) {
+			 // sets value of the amount red to blue cars
+			blue++;
+			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+				for (int row = 0; row < getNumberOfRows(); row++) {
+					for (int place = 0; place < getNumberOfPlaces(); place++) {
+						Location location = new Location(floor, row, place);
+						if (getCarAt(location) == null) {
+							return location;
+						}
+					}
+				}
+			}
+
+		}
+		return null;
+	}
+>>>>>>> debugged_gui
 
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
