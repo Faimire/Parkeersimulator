@@ -26,7 +26,7 @@ public class SimulatorView extends JFrame {
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
     public static ChartPanel panel;
-    public static int blue = 0, red = 0;
+    public static int blue = 0, red = 0, white = 300;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -38,7 +38,7 @@ public class SimulatorView extends JFrame {
         
         carParkView = new CarParkView();
         panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
-//setups the ContentPane for views             
+        //setups the ContentPane for views             
         clock();
         contentPane = getContentPane();
         addToPane();
@@ -135,9 +135,11 @@ public class SimulatorView extends JFrame {
 		// sets value of the amount red to blue cars
         if(car.getHasToPay() == true) {
         	red--;
+        	white++;
         }
         if(car.getHasToPay() == false) {
            blue--;
+           white++;
         }
         return car;
     }
@@ -148,6 +150,7 @@ public class SimulatorView extends JFrame {
 		if (car.getHasToPay() == true) {
 			 // sets value of the amount red to blue cars
 			red++;
+			white--;
 			for (int floor = 1; floor < getNumberOfFloors(); floor++) {
 				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -164,6 +167,7 @@ public class SimulatorView extends JFrame {
 		if (car.getHasToPay() == false) {
 			 // sets value of the amount red to blue cars
 			blue++;
+			white--;
 			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
 				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
