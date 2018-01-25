@@ -40,9 +40,9 @@ public class Simulator implements Runnable{
 
     public static int tickPause = 100;
 
-    int weekDayArrivals= 300; // average number of arriving cars per hour
-    int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 200; // average number of arriving cars per hour
+    int weekDayArrivals= 100; // average number of arriving cars per hour
+    int weekendArrivals = 0; // average number of arriving cars per hour
+    int weekDayPassArrivals= 75; // average number of arriving cars per hour
     int weekendPassArrivals = 50; // average number of arriving cars per hour
 
     int enterSpeed = 1; // number of cars that can enter per minute
