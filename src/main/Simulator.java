@@ -40,9 +40,9 @@ public class Simulator implements Runnable{
 
     public static int tickPause = 100;
 
-    int weekDayArrivals= 100; // average number of arriving cars per hour
+    int weekDayArrivals= 40; // average number of arriving cars per hour
     int weekendArrivals = 200; // average number of arriving cars per hour
-    int weekDayPassArrivals= 50; // average number of arriving cars per hour
+    int weekDayPassArrivals= 20; // average number of arriving cars per hour
     int weekendPassArrivals = 50; // average number of arriving cars per hour
 
     int enterSpeed = 3; // number of cars that can enter per minute
@@ -73,12 +73,14 @@ public class Simulator implements Runnable{
 
 	public void run() {
 		
+	
 		while (started == true) {
 			tick();
 			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
 			while(started == false) {
 				System.out.println("stopped");
 			}
+			SimulatorView.updatePie();
 
 							
 			}
@@ -258,4 +260,5 @@ public class Simulator implements Runnable{
         this.started = started;
         return started;
     }
+    
 }

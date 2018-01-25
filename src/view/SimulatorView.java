@@ -3,7 +3,11 @@ package view;
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+
 import logic.*;
+import main.Simulator;
 
 import java.awt.*;
 
@@ -18,10 +22,10 @@ public class SimulatorView extends JFrame {
     private int numberOfPlaces;
     private int numberOfOpenSpots;
     private Car[][][] cars;
-    public Container contentPane;
+    public static Container contentPane;
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
-    public Border loweredbevel;
+    public static ChartPanel panel;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -32,20 +36,28 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        loweredbevel = BorderFactory.createLoweredBevelBorder();
-        
-        
+        ChartPanel panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+             
         clock();
         contentPane = getContentPane();
         contentPane.add(clock);
         contentPane.add(carParkView);
+        contentPane.add(panel);
         contentPane.setLayout(null);
         clock.setBounds(100,600,200,50);
         carParkView.setBounds(100,75,850,500); 
+        panel.setBounds(1050, 75, 800, 400);
         setVisible(true);
         pack();
 
         updateView();
+    }
+    
+    public static void updatePie() {
+    	panel = null;
+    	ChartPanel panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+    	contentPane.add(panel);	
+    	panel.setBounds(1050, 75, 800, 400);
     }
     
     public void clock() {
