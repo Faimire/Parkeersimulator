@@ -45,9 +45,9 @@ public class Simulator implements Runnable{
     int weekDayPassArrivals= 20; // average number of arriving cars per hour
     int weekendPassArrivals = 50; // average number of arriving cars per hour
 
-    int enterSpeed = 3; // number of cars that can enter per minute
-    int paymentSpeed = 7; // number of cars that can pay per minute
-    int exitSpeed = 5; // number of cars that can leave per minute
+    int enterSpeed = 1; // number of cars that can enter per minute
+    int paymentSpeed = 3; // number of cars that can pay per minute
+    int exitSpeed = 1; // number of cars that can leave per minute
     
     public static boolean started = true;// says if the application is started or not
 
