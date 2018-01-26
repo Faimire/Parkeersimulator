@@ -6,12 +6,16 @@ public abstract class Car {
 
     private Location location;
     private int minutesLeft;
+    private int amountOfMinutes;
     private boolean isPaying;
     private boolean hasToPay;
+    private boolean hasReserved;
+    private boolean carReadyToEnterGarage;
 
     /**
      * Constructor for objects of class Car
      */
+    
     public Car() {
 
     }
@@ -27,6 +31,15 @@ public abstract class Car {
     public int getMinutesLeft() {
         return minutesLeft;
     }
+    
+    public int getamountOfMinutes() {
+    	return amountOfMinutes;
+    	
+    }
+    
+    public void setamountOfMinutes(int time) {
+    	amountOfMinutes = time;
+    }
 
     public void setMinutesLeft(int minutesLeft) {
         this.minutesLeft = minutesLeft;
@@ -35,7 +48,15 @@ public abstract class Car {
     public boolean getIsPaying() {
         return isPaying;
     }
+    
+    public boolean gethasReserved() {
+    	return hasReserved;
+    }
 
+    public boolean carReadyToEnterGarage() {
+    	return carReadyToEnterGarage;
+    }
+    
     public void setIsPaying(boolean isPaying) {
         this.isPaying = isPaying;
     }
@@ -46,6 +67,14 @@ public abstract class Car {
 
     public void setHasToPay(boolean hasToPay) {
         this.hasToPay = hasToPay;
+    }
+    
+    public void sethasReserved(boolean hasReserved) {
+    	this.hasReserved = hasReserved;
+    }
+    
+    public void setcarReadyToEnterGarage(boolean carReadyToEnterGarage) {
+    	this.carReadyToEnterGarage = carReadyToEnterGarage;
     }
 
     public void tick() {

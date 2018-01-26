@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+
 import java.awt.Container;
 import java.util.Random;
 
