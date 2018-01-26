@@ -29,6 +29,16 @@ public class Piechart {
 		return dataset;
 	}
 
+	
+	public static PieDataset createQueueDataset() {
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.RedQueue), new Integer(SimulatorView.RedQueue));
+		dataset.setValue("subscription " + String.valueOf(SimulatorView.BlueQueue), new Integer(SimulatorView.BlueQueue));
+		dataset.setValue("reserved " + String.valueOf(SimulatorView.YellowQueue), new Integer(SimulatorView.YellowQueue));
+		return dataset;
+	}
+
+
 	public static JFreeChart createChart(PieDataset dataset, String name) {
 		JFreeChart chart = ChartFactory.createRingChart(name, // chart title
 				dataset, // data

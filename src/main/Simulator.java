@@ -37,13 +37,13 @@ public class Simulator implements Runnable {
 	private int day = 0; // gives the day the simulator is on
 	private int hour = 0; // gives the hour the simulator is on
 	private int minute = 0; // gives the minute the simulator is on
-	private int f = 0; // gives the amount of people that forget
+
 
 	public static int tickPause = 100;
 
 	int weekDayArrivals = 100; // average number of arriving cars per hour
 	int weekendArrivals = 0; // average number of arriving cars per hour
-	int weekDayPassArrivals = 30; // average number of arriving cars per hour
+	int weekDayPassArrivals = 100; // average number of arriving cars per hour
 	int weekendPassArrivals = 50; // average number of arriving cars per hour
 	int weekDayReservationArrivals = 30;
 	int weekendReservationArrivals = 30;
@@ -166,6 +166,17 @@ public class Simulator implements Runnable {
 			Location freeLocation = simulatorView.getFirstFreeLocation(car);
 			simulatorView.setCarAt(freeLocation, car);
 			i++;
+
+			if(car.gethasReserved() == true && car.getHasToPay() == true && freeLocation != null) {
+				SimulatorView.YellowQueue--;
+			}
+			if(car.gethasReserved() == false && car.getHasToPay() == true && freeLocation != null) {
+				SimulatorView.RedQueue--;
+			}
+			if(car.gethasReserved() == false && car.getHasToPay() == false && freeLocation != null) {
+				SimulatorView.BlueQueue--;
+			}
+
 		}
 
 	}
@@ -183,6 +194,9 @@ public class Simulator implements Runnable {
 			car = simulatorView.getFirstLeavingCar();
 		}
 	}
+
+
+
 
 	private void carsPaying() {
 		// Let cars pay.
@@ -222,20 +236,24 @@ public class Simulator implements Runnable {
 		case AD_HOC:
 			for (int i = 0; i < numberOfCars; i++) {
 				entranceCarQueue.addCar(new AdHocCar());
+				SimulatorView.RedQueue++;
 			}
 			break;
 		case PASS:
 			for (int i = 0; i < numberOfCars; i++) {
 				entrancePassQueue.addCar(new ParkingPassCar());
+				SimulatorView.BlueQueue++;
 			}
 			break;
 		case RES:
 			for (int i = 0; i < numberOfCars; i++) {
 				entranceCarQueue.addCar(new ReservationCar());
+				SimulatorView.YellowQueue++;
 			}
 			break;
 		}
 	}
+
 
 	private void carLeavesSpot(Car car) {
 		simulatorView.removeCarAt(car.getLocation());

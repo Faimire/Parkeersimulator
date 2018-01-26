@@ -27,7 +27,7 @@ public class SimulatorView extends JFrame {
     public static JLabel clock;
     public static ChartPanel panel;
     public static int blue = 0, red = 0, white = 300, yellow = 0;
-
+    public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
         this.numberOfFloors = numberOfFloors;
@@ -74,7 +74,7 @@ public class SimulatorView extends JFrame {
     public static void updatePie2() {
     	contentPane.remove(panel);
     	panel = null;
-    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(200), "chart2"));
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createQueueDataset(), "Queue"));
     	contentPane.add(panel);	
     	panel.setBounds(1050, 75, 800, 400);
     }
@@ -185,7 +185,8 @@ public class SimulatorView extends JFrame {
 			}
 
 		}
-		if (car.gethasReserved() == false) {
+
+		if (car.gethasReserved() == false && car.getHasToPay() == false) {
 			// sets value of the amount red to blue cars
 			blue++;
 			white--;
@@ -202,7 +203,9 @@ public class SimulatorView extends JFrame {
 
 		}
 		
-		if (car.gethasReserved() == true) {
+
+		if (car.gethasReserved() == true && car.getHasToPay() == true) {
+
 			// sets value of the amount red to blue cars to yellow cars
 			yellow++;
 			white--;
