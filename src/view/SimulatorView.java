@@ -164,7 +164,7 @@ public class SimulatorView extends JFrame {
 	public Location getFirstFreeLocation(Car car) {
 
 		if (car.getHasToPay() == true) {
-			 // sets value of the amount red to blue cars
+			// sets value of the amount red to blue cars
 			red++;
 			white--;
 			for (int floor = 1; floor < getNumberOfFloors(); floor++) {
@@ -181,11 +181,11 @@ public class SimulatorView extends JFrame {
 
 		}
 		if (car.getHasToPay() == false) {
-			 // sets value of the amount red to blue cars
+			// sets value of the amount red to blue cars
 			blue++;
 			white--;
 			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-				for (int row = 0; row < getNumberOfRows(); row++) {
+				for (int row = 2; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
 						Location location = new Location(floor, row, place);
 						if (getCarAt(location) == null) {
