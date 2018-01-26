@@ -28,6 +28,7 @@ public class SimulatorView extends JFrame {
     public static ChartPanel panel;
     public static int blue = 0, red = 0, white = 300, yellow = 0;
     public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
+    
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
         this.numberOfFloors = numberOfFloors;
@@ -209,8 +210,8 @@ public class SimulatorView extends JFrame {
 			// sets value of the amount red to blue cars to yellow cars
 			yellow++;
 			white--;
-			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-				for (int row = 0; row < getNumberOfRows(); row++) {
+			for (int floor = 0; floor < getNumberOfFloors() -2; floor++) {
+				for (int row = 0; row < getNumberOfRows() - 4 ; row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
 						Location location = new Location(floor, row, place);
 						if (getCarAt(location) == null) {

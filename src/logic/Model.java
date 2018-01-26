@@ -17,14 +17,15 @@ public class Model {
 	}
 
 	public void faster() {
-		if (Simulator.tickPause > 0) {
+		if (Simulator.tickPause > 10) {
 			Simulator.tickPause -= 10;
 		}
 
-		if (Simulator.tickPause == 0) {
+		if (Simulator.tickPause == 10) {
 			JFrame frame = new JFrame();
 			JOptionPane.showMessageDialog(frame, "can't go faster.");
 		}
+		
 	}
 
 	public void slower() {
