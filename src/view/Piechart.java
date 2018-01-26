@@ -25,11 +25,12 @@ public class Piechart {
 		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.red), new Integer(SimulatorView.red));
 		dataset.setValue("subsription " + String.valueOf(SimulatorView.blue), new Integer(SimulatorView.blue));
 		dataset.setValue("open-space " + String.valueOf(SimulatorView.white), new Integer(SimulatorView.white + i));
+		dataset.setValue("reserved " + String.valueOf(SimulatorView.yellow), new Integer(SimulatorView.yellow));
 		return dataset;
 	}
 
 	public static JFreeChart createChart(PieDataset dataset, String name) {
-		JFreeChart chart = ChartFactory.createRingChart(name, // chart title
+		JFreeChart chart = ChartFactory.createPieChart(name, // chart title
 				dataset, // data
 				true, // include legend
 				true, false);

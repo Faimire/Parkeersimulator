@@ -23,6 +23,7 @@ public class Simulator implements Runnable {
 
 	private static final String AD_HOC = "1";
 	private static final String PASS = "2";
+	private static final String RES = "3";
 
 	private CarQueue entranceCarQueue;
 	private CarQueue entrancePassQueue;
@@ -44,6 +45,8 @@ public class Simulator implements Runnable {
 	int weekendArrivals = 0; // average number of arriving cars per hour
 	int weekDayPassArrivals = 30; // average number of arriving cars per hour
 	int weekendPassArrivals = 50; // average number of arriving cars per hour
+	int weekDayReservationArrivals = 30;
+	int weekendReservationArrivals = 30;
 
 	int enterSpeed = 1; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
@@ -151,6 +154,8 @@ public class Simulator implements Runnable {
 		addArrivingCars(numberOfCars, AD_HOC);
 		numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
 		addArrivingCars(numberOfCars, PASS);
+		numberOfCars = getNumberOfCars(weekDayReservationArrivals, weekendReservationArrivals);
+		addArrivingCars(numberOfCars, RES);
 	}
 
 	private void carsEntering(CarQueue queue) {
@@ -222,6 +227,11 @@ public class Simulator implements Runnable {
 		case PASS:
 			for (int i = 0; i < numberOfCars; i++) {
 				entrancePassQueue.addCar(new ParkingPassCar());
+			}
+			break;
+		case RES:
+			for (int i = 0; i < numberOfCars; i++) {
+				entranceCarQueue.addCar(new ReservationCar());
 			}
 			break;
 		}

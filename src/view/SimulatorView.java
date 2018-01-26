@@ -26,7 +26,7 @@ public class SimulatorView extends JFrame {
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
     public static ChartPanel panel;
-    public static int blue = 0, red = 0, white = 300;
+    public static int blue = 0, red = 0, white = 300, yellow = 0;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -149,13 +149,18 @@ public class SimulatorView extends JFrame {
         car.setLocation(null);
         numberOfOpenSpots++;
 		// sets value of the amount red to blue cars
-        if(car.getHasToPay() == true) {
+        if(car.getHasToPay() == true && car.gethasReserved() == false) {
         	red--;
         	white++;
         }
-        if(car.getHasToPay() == false) {
+        if(car.getHasToPay() == false && car.gethasReserved() == false) {
            blue--;
            white++;
+        }
+        
+        if(car.gethasReserved() == true) {
+        	yellow--;
+        	white++;
         }
         return car;
     }
@@ -163,7 +168,7 @@ public class SimulatorView extends JFrame {
 	// gives cars the place they need park
 	public Location getFirstFreeLocation(Car car) {
 
-		if (car.getHasToPay() == true) {
+		if (car.gethasReserved() == false && car.getHasToPay() == true) {
 			// sets value of the amount red to blue cars
 			red++;
 			white--;
@@ -180,12 +185,29 @@ public class SimulatorView extends JFrame {
 			}
 
 		}
-		if (car.getHasToPay() == false) {
+		if (car.gethasReserved() == false) {
 			// sets value of the amount red to blue cars
 			blue++;
 			white--;
 			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
 				for (int row = 2; row < getNumberOfRows(); row++) {
+					for (int place = 0; place < getNumberOfPlaces(); place++) {
+						Location location = new Location(floor, row, place);
+						if (getCarAt(location) == null) {
+							return location;
+						}
+					}
+				}
+			}
+
+		}
+		
+		if (car.gethasReserved() == true) {
+			// sets value of the amount red to blue cars to yellow cars
+			yellow++;
+			white--;
+			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
 						Location location = new Location(floor, row, place);
 						if (getCarAt(location) == null) {
