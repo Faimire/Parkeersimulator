@@ -26,7 +26,7 @@ public class SimulatorView extends JFrame {
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
     public static ChartPanel panel;
-    public static int blue = 0, red = 0;
+    public static int blue = 0, red = 0, white = 300, yellow = 0;
 
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.inactiveCaption);
@@ -37,8 +37,8 @@ public class SimulatorView extends JFrame {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         carParkView = new CarParkView();
-        panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
-//setups the ContentPane for views             
+        panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+        //setups the ContentPane for views             
         clock();
         contentPane = getContentPane();
         addToPane();
@@ -65,10 +65,26 @@ public class SimulatorView extends JFrame {
     public static void updatePie() {
     	contentPane.remove(panel);
     	panel = null;
-    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset()));
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
     	contentPane.add(panel);	
     	panel.setBounds(1050, 75, 800, 400);
     	
+    }
+    
+    public static void updatePie2() {
+    	contentPane.remove(panel);
+    	panel = null;
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(200), "chart2"));
+    	contentPane.add(panel);	
+    	panel.setBounds(1050, 75, 800, 400);
+    }
+    
+    public static void updatePie3() {
+    	contentPane.remove(panel);
+    	panel = null;
+    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(500), "chart3"));
+    	contentPane.add(panel);	
+    	panel.setBounds(1050, 75, 800, 400);
     }
     // setups the clock label for view
     public void clock() {
@@ -133,11 +149,18 @@ public class SimulatorView extends JFrame {
         car.setLocation(null);
         numberOfOpenSpots++;
 		// sets value of the amount red to blue cars
-        if(car.getHasToPay() == true) {
+        if(car.getHasToPay() == true && car.gethasReserved() == false) {
         	red--;
+        	white++;
         }
-        if(car.getHasToPay() == false) {
+        if(car.getHasToPay() == false && car.gethasReserved() == false) {
            blue--;
+           white++;
+        }
+        
+        if(car.gethasReserved() == true) {
+        	yellow--;
+        	white++;
         }
         return car;
     }
@@ -145,9 +168,10 @@ public class SimulatorView extends JFrame {
 	// gives cars the place they need park
 	public Location getFirstFreeLocation(Car car) {
 
-		if (car.getHasToPay() == true) {
-			 // sets value of the amount red to blue cars
+		if (car.gethasReserved() == false && car.getHasToPay() == true) {
+			// sets value of the amount red to blue cars
 			red++;
+			white--;
 			for (int floor = 1; floor < getNumberOfFloors(); floor++) {
 				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
@@ -161,9 +185,27 @@ public class SimulatorView extends JFrame {
 			}
 
 		}
-		if (car.getHasToPay() == false) {
-			 // sets value of the amount red to blue cars
+		if (car.gethasReserved() == false) {
+			// sets value of the amount red to blue cars
 			blue++;
+			white--;
+			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
+				for (int row = 2; row < getNumberOfRows(); row++) {
+					for (int place = 0; place < getNumberOfPlaces(); place++) {
+						Location location = new Location(floor, row, place);
+						if (getCarAt(location) == null) {
+							return location;
+						}
+					}
+				}
+			}
+
+		}
+		
+		if (car.gethasReserved() == true) {
+			// sets value of the amount red to blue cars to yellow cars
+			yellow++;
+			white--;
 			for (int floor = 0; floor < getNumberOfFloors(); floor++) {
 				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
