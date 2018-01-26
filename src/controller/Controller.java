@@ -43,9 +43,9 @@ public class Controller implements ActionListener {
 		button4.addActionListener(this);
 		button5 = new JButton("- 1");
 		button5.addActionListener(this);
-		button6 = new JButton("FASTER");
+		button6 = new JButton("SLOWER");
 		button6.addActionListener(this);
-		button7 = new JButton("SLOWER");
+		button7 = new JButton("FASTER");
 		button7.addActionListener(this);
 		piebutton1 = new JButton("previous");
 		piebutton1.addActionListener(this);
@@ -88,10 +88,10 @@ public class Controller implements ActionListener {
 			model.pause();
 		}
 		if (e.getSource() == button6) {
-			model.faster();
+			model.slower();
 		}
 		if (e.getSource() == button7) {
-			model.slower();
+			model.faster();
 		}
 
 		if (e.getSource() == piebutton1) {
