@@ -30,7 +30,7 @@ public class Piechart {
 	}
 
 	public static JFreeChart createChart(PieDataset dataset, String name) {
-		JFreeChart chart = ChartFactory.createPieChart(name, // chart title
+		JFreeChart chart = ChartFactory.createRingChart(name, // chart title
 				dataset, // data
 				true, // include legend
 				true, false);
