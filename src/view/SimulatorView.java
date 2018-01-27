@@ -28,6 +28,8 @@ public class SimulatorView extends JFrame {
     public static ChartPanel panel;
     public static int blue = 0, red = 0, white = 300, yellow = 0;
     public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
+    public static int ArrivalCurrent = 0;
+    public static int[] ArrivalHistogram = new int[10];
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.gray);
@@ -83,7 +85,7 @@ public class SimulatorView extends JFrame {
     public static void updatePie3() {
     	contentPane.remove(panel);
     	panel = null;
-    	panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(500), "chart3"));
+    	panel = new ChartPanel(Piechart.createLineChart(Piechart.createhistogram(), "Histogram"));
     	contentPane.add(panel);	
     	panel.setBounds(1050, 75, 800, 400);
     }

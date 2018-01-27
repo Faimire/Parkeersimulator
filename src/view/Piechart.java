@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.RingPlot;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -37,6 +39,22 @@ public class Piechart {
 		dataset.setValue("reserved " + String.valueOf(SimulatorView.YellowQueue), new Integer(SimulatorView.YellowQueue));
 		return dataset;
 	}
+	
+	public static DefaultCategoryDataset createhistogram() {
+		 int length = SimulatorView.ArrivalHistogram.length;
+		 int position = 0;
+		 DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
+		 for(int i = 0; i < length; i++) {
+				if(SimulatorView.ArrivalHistogram[i] != 0) {
+					position++;
+				}
+			}
+		 for(int f = 0; f <= position; f++) {
+		 dataset.setValue(SimulatorView.ArrivalHistogram[position], "Arrivals", "day " + String.valueOf(position));
+		 }
+		 
+		 return dataset;
+	}
 
 
 	public static JFreeChart createChart(PieDataset dataset, String name) {
@@ -45,6 +63,12 @@ public class Piechart {
 				true, // include legend
 				true, false);
 
+		return chart;
+	}
+	
+	public static JFreeChart createLineChart(DefaultCategoryDataset dataset, String name) {
+		JFreeChart chart = ChartFactory.createLineChart(name, "day", "cars", dataset, PlotOrientation.VERTICAL,
+		         true,true,false);
 		return chart;
 	}
 

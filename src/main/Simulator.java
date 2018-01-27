@@ -103,6 +103,7 @@ public class Simulator implements Runnable {
 		advanceTime();
 		handleExit();
 		updateViews();
+		updatehistogram();
 		// Pause.
 		try {
 			Thread.sleep(tickPause);
@@ -129,6 +130,22 @@ public class Simulator implements Runnable {
 			day -= 7;
 		}
 
+	}
+	
+	private void updatehistogram() {
+		int length = SimulatorView.ArrivalHistogram.length;
+		int position = 0;
+		if(hour == 24 && minute == 60) {
+			for(int i = 0; i < length; i++) {
+				if(SimulatorView.ArrivalHistogram[i] != 0) {
+					position++;
+				}
+			}
+			SimulatorView.ArrivalHistogram[position] = SimulatorView.ArrivalCurrent;
+			SimulatorView.ArrivalCurrent = 0;
+			
+		}
+		
 	}
 
 	private void handleEntrance() {
@@ -237,18 +254,21 @@ public class Simulator implements Runnable {
 			for (int i = 0; i < numberOfCars; i++) {
 				entranceCarQueue.addCar(new AdHocCar());
 				SimulatorView.RedQueue++;
+				SimulatorView.ArrivalCurrent++;
 			}
 			break;
 		case PASS:
 			for (int i = 0; i < numberOfCars; i++) {
 				entrancePassQueue.addCar(new ParkingPassCar());
 				SimulatorView.BlueQueue++;
+				SimulatorView.ArrivalCurrent++;
 			}
 			break;
 		case RES:
 			for (int i = 0; i < numberOfCars; i++) {
 				entranceCarQueue.addCar(new ReservationCar());
 				SimulatorView.YellowQueue++;
+				SimulatorView.ArrivalCurrent++;
 			}
 			break;
 		}
