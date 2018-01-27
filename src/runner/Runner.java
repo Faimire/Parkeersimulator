@@ -10,7 +10,7 @@ public class Runner {
         PiechartThread piechart = new PiechartThread();
         piechart.start();
         Music music = new Music();
-        music.run();
+        music.start();
 	}
 
 }
