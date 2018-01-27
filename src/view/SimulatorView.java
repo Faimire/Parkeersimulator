@@ -30,7 +30,7 @@ public class SimulatorView extends JFrame {
     public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
-    	getContentPane().setBackground(SystemColor.inactiveCaption);
+    	getContentPane().setBackground(SystemColor.gray);
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
