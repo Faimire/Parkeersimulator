@@ -14,7 +14,9 @@ public class Music implements Runnable{
 	 public boolean yes = true;
 
 	public void run() {
+		while(yes == true) {
 		play();
+		}
 	}
 	
 	public void play() {
@@ -22,7 +24,7 @@ public class Music implements Runnable{
 		   File file = new File("saiki.wav");
 		   Clip clip = AudioSystem.getClip();
 		   clip.open(AudioSystem.getAudioInputStream(file));
-		   clip.start();
+		   clip.loop(Clip.LOOP_CONTINUOUSLY);
 		   Thread.sleep(clip.getMicrosecondLength());
 		  } catch (Exception e) {
 		   System.err.println(e.getMessage());
