@@ -9,6 +9,8 @@ public class Runner {
         simulator.start();
         PiechartThread piechart = new PiechartThread();
         piechart.start();
+        Music music = new Music();
+        music.run();
 	}
 
 }
