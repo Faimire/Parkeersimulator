@@ -52,12 +52,12 @@ public class Piechart {
 		}
 		if (length != 0) {
 			for (int f = 0; f < position; f++) {
-				dataset.addValue(SimulatorView.ArrivalHistogram.get(f), "Arrivals", "day " + String.valueOf(f));
+				dataset.addValue(SimulatorView.ArrivalHistogram.get(f), "Arrivals", "hour " + String.valueOf(f));
 			}
 		}
 		
 		else {
-			dataset.setValue(0, "Arrivals", "day " + String.valueOf(position));
+			dataset.setValue(0, "Arrivals", "hour " + String.valueOf(position));
 		}
 
 		return dataset;
@@ -74,7 +74,7 @@ public class Piechart {
 	}
 	
 	public static JFreeChart createLineChart(DefaultCategoryDataset dataset, String name) {
-		JFreeChart chart = ChartFactory.createLineChart(name, "days", "cars", dataset, PlotOrientation.VERTICAL,
+		JFreeChart chart = ChartFactory.createLineChart(name, "hours", "cars", dataset, PlotOrientation.VERTICAL,
 		         true,true,false);
 		return chart;
 	}
