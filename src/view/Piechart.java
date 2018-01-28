@@ -51,10 +51,23 @@ public class Piechart {
 				position++;
 		}
 		if (length != 0) {
+			if(length <= 11) {
 			for (int f = 0; f < position; f++) {
 				dataset.addValue(SimulatorView.ArrivalHistogram.get(f), "Arrivals", "hour " + String.valueOf(f));
 			}
 		}
+		}
+		
+		if (length != 0) {
+			if(length > 11) {
+			int lenght2 = SimulatorView.ArrivalHistogram.size();
+			for (int f = lenght2 - 11; f < position; f++) {
+				dataset.addValue(SimulatorView.ArrivalHistogram.get(f), "Arrivals", "hour " + String.valueOf(f));
+			}
+		}
+		}
+		
+		
 		
 		else {
 			dataset.setValue(0, "Arrivals", "hour " + String.valueOf(position));
