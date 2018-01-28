@@ -87,7 +87,6 @@ public class Simulator implements Runnable {
 
 		while (started == true) {
 			tick();
-			System.out.println("Days " + day + " Hours " + hour + " Minutes " + minute);
 			while (started == false) {
 				System.out.println("stopped");
 			}
@@ -133,15 +132,15 @@ public class Simulator implements Runnable {
 	}
 	
 	private void updatehistogram() {
-		int length = SimulatorView.ArrivalHistogram.length;
+		int length = SimulatorView.ArrivalHistogram.size();
 		int position = 0;
-		if(hour == 24 && minute == 60) {
-			for(int i = 0; i < length; i++) {
-				if(SimulatorView.ArrivalHistogram[i] != 0) {
+		if(hour == 23 && minute == 59) {
+			/*for(int i = 0; i < length; i++) {
+				if(SimulatorView.ArrivalHistogram.get(i) != 0) {
 					position++;
 				}
-			}
-			SimulatorView.ArrivalHistogram[position] = SimulatorView.ArrivalCurrent;
+			}*/
+			SimulatorView.ArrivalHistogram.add(SimulatorView.ArrivalCurrent);
 			SimulatorView.ArrivalCurrent = 0;
 			
 		}

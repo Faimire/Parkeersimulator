@@ -34,26 +34,33 @@ public class Piechart {
 	
 	public static PieDataset createQueueDataset() {
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.RedQueue), new Integer(SimulatorView.RedQueue));
-		dataset.setValue("subscription " + String.valueOf(SimulatorView.BlueQueue), new Integer(SimulatorView.BlueQueue));
-		dataset.setValue("reserved " + String.valueOf(SimulatorView.YellowQueue), new Integer(SimulatorView.YellowQueue));
+		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.RedQueue),
+				new Integer(SimulatorView.RedQueue));
+		dataset.setValue("subscription " + String.valueOf(SimulatorView.BlueQueue),
+				new Integer(SimulatorView.BlueQueue));
+		dataset.setValue("reserved " + String.valueOf(SimulatorView.YellowQueue),
+				new Integer(SimulatorView.YellowQueue));
 		return dataset;
 	}
 	
 	public static DefaultCategoryDataset createhistogram() {
-		 int length = SimulatorView.ArrivalHistogram.length;
-		 int position = 0;
-		 DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
-		 for(int i = 0; i < length; i++) {
-				if(SimulatorView.ArrivalHistogram[i] != 0) {
-					position++;
-				}
+		int length = SimulatorView.ArrivalHistogram.size();
+		int position = 0;
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		for (int i = 0; i < length; i++) {
+				position++;
+		}
+		if (length != 0) {
+			for (int f = 0; f < position; f++) {
+				dataset.addValue(SimulatorView.ArrivalHistogram.get(f), "Arrivals", "day " + String.valueOf(f));
 			}
-		 for(int f = 0; f <= position; f++) {
-		 dataset.setValue(SimulatorView.ArrivalHistogram[position], "Arrivals", "day " + String.valueOf(position));
-		 }
-		 
-		 return dataset;
+		}
+		
+		else {
+			dataset.setValue(0, "Arrivals", "day " + String.valueOf(position));
+		}
+
+		return dataset;
 	}
 
 
@@ -67,7 +74,7 @@ public class Piechart {
 	}
 	
 	public static JFreeChart createLineChart(DefaultCategoryDataset dataset, String name) {
-		JFreeChart chart = ChartFactory.createLineChart(name, "day", "cars", dataset, PlotOrientation.VERTICAL,
+		JFreeChart chart = ChartFactory.createLineChart(name, "days", "cars", dataset, PlotOrientation.VERTICAL,
 		         true,true,false);
 		return chart;
 	}

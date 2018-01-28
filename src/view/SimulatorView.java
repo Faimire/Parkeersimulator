@@ -10,6 +10,7 @@ import logic.*;
 import main.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SimulatorView extends JFrame {
     /**
@@ -23,13 +24,14 @@ public class SimulatorView extends JFrame {
     private int numberOfOpenSpots;
     private Car[][][] cars;
     public static Container contentPane;
+    //all the view elements that instantiate in the view
     public JButton button1, button2, button3, button4;
     public static JLabel clock;
     public static ChartPanel panel;
     public static int blue = 0, red = 0, white = 300, yellow = 0;
     public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
     public static int ArrivalCurrent = 0;
-    public static int[] ArrivalHistogram = new int[10];
+    public static ArrayList<Integer> ArrivalHistogram = new ArrayList<Integer>();
     
     public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
     	getContentPane().setBackground(SystemColor.gray);
