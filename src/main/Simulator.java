@@ -134,17 +134,16 @@ public class Simulator implements Runnable {
 	private void updatehistogram() {
 		int length = SimulatorView.ArrivalHistogram.size();
 		int position = 0;
-		if(minute == 1) {
-			/*for(int i = 0; i < length; i++) {
-				if(SimulatorView.ArrivalHistogram.get(i) != 0) {
-					position++;
-				}
-			}*/
+		if (minute == 1) {
+			/*
+			 * for(int i = 0; i < length; i++) { if(SimulatorView.ArrivalHistogram.get(i) !=
+			 * 0) { position++; } }
+			 */
 			SimulatorView.ArrivalHistogram.add(SimulatorView.ArrivalCurrent);
 			SimulatorView.ArrivalCurrent = 0;
-			
+
 		}
-		
+
 	}
 
 	private void handleEntrance() {

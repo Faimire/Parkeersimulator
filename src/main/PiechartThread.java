@@ -2,9 +2,9 @@ package main;
 
 import view.SimulatorView;
 
-public class PiechartThread implements Runnable{
-	 public Thread thread;
-	 public static int whatchart = 0;
+public class PiechartThread implements Runnable {
+	public Thread thread;
+	public static int whatchart = 0;
 
 	public void run() {
 		while (Simulator.started == true) {
@@ -46,12 +46,12 @@ public class PiechartThread implements Runnable{
 			}
 		}
 	}
-	 
-	 public void start() {
-		 if(thread == null) {
-			 thread = new Thread(this, "piechart");
-			 thread.start();
-		 }
-	 }
+
+	public void start() {
+		if (thread == null) {
+			thread = new Thread(this, "piechart");
+			thread.start();
+		}
+	}
 
 }
