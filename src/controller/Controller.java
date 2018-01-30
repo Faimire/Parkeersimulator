@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.Container;
 
 import java.awt.event.ActionEvent;
@@ -8,11 +9,14 @@ import logic.*;
 import main.*;
 import view.*;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 public class Controller implements ActionListener {
 	public JButton button1, button2, button3, button4, button5, button6, button7, piebutton1, piebutton2;
+	public JPanel GUIpanel;
 	public SimulatorView view;
 	public static Model model;
 
@@ -51,31 +55,37 @@ public class Controller implements ActionListener {
 		piebutton1.addActionListener(this);
 		piebutton2 = new JButton("next");
 		piebutton2.addActionListener(this);
+		GUIpanel = new JPanel();
 
 	}
 
 	public void addButtons(SimulatorView view) {
-		view.add(button1);
-		view.add(button2);
-		view.add(button3);
-		view.add(button4);
-		view.add(button5);
-		view.add(button6);
-		view.add(button7);
+		GUIpanel.add(button1);
+		GUIpanel.add(button2);
+		GUIpanel.add(button3);
+		GUIpanel.add(button4);
+		GUIpanel.add(button5);
+		GUIpanel.add(button6);
+		GUIpanel.add(button7);
 		view.add(piebutton1);
 		view.add(piebutton2);
+		view.add(GUIpanel);
 	}
 
 	public void setupButtons() {
+        
+		GUIpanel.setLayout(null);
+		GUIpanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		GUIpanel.setBounds(100,700, 900,350);
 		piebutton2.setBounds(1500, 500, 150, 40);
 		piebutton1.setBounds(1200, 500, 150, 40);
-		button7.setBounds(700, 700, 150, 40);
-		button6.setBounds(500, 700, 150, 40);
-		button5.setBounds(500, 900, 150, 40);
-		button4.setBounds(700, 900, 150, 40);
-		button3.setBounds(100, 700, 273, 65);
-		button2.setBounds(100, 800, 273, 65);
-		button1.setBounds(100, 900, 273, 65);
+		button7.setBounds(700, 50, 150, 40);
+		button6.setBounds(500, 50, 150, 40);
+		button5.setBounds(500, 150, 150, 40);
+		button4.setBounds(700, 150, 150, 40);
+		button3.setBounds(50, 50, 273, 65);
+		button2.setBounds(50, 150, 273, 65);
+		button1.setBounds(50, 250, 273, 65);
 	}
 
 	// give the actions that the buttons are performed a method.
