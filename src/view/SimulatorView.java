@@ -28,7 +28,7 @@ public class SimulatorView extends JFrame {
 	public JButton button1, button2, button3, button4;
 	public static JLabel clock;
 	public static ChartPanel panel;
-	public static int blue = 0, red = 0, white = 300, yellow = 0;
+	public static int blue = 0, red = 0, white = 540, yellow = 0;
 	public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
 	public static int ArrivalCurrent = 0;
 	public static ArrayList<Integer> ArrivalHistogram = new ArrayList<Integer>();

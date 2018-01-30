@@ -116,6 +116,7 @@ public class Simulator implements Runnable {
 		handleExit();
 		updateViews();
 		updatehistogram();
+		ChangeValues();
 		// Pause.
 		try {
 			Thread.sleep(tickPause);
@@ -142,6 +143,12 @@ public class Simulator implements Runnable {
 			day -= 7;
 		}
 
+	}
+	
+	private void ChangeValues() {
+		if(day == 1 && hour > 7 && minute < 60) {
+			weekDayArrivals = 200;
+		}
 	}
 	
 	private void updatehistogram() {
