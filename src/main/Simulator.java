@@ -43,11 +43,11 @@ public class Simulator implements Runnable {
 	public static int tickPause = 100;
 
 	int weekDayArrivals = 100; // average number of arriving cars per hour
-	int weekendArrivals = 0; // average number of arriving cars per hour
+	int weekendArrivals = 50; // average number of arriving cars per hour
 	int weekDayPassArrivals = 100; // average number of arriving cars per hour
 	int weekendPassArrivals = 50; // average number of arriving cars per hour
-	int weekDayReservationArrivals = 30;
-	int weekendReservationArrivals = 30;
+	int weekDayReservationArrivals = 30; // average number of reservations cars per hour
+	int weekendReservationArrivals = 30; // average number of reservations cars per hour
 
 	int enterSpeed = 1; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
@@ -90,6 +90,18 @@ public class Simulator implements Runnable {
 			tick();
 			while (started == false) {
 				System.out.println("stopped");
+				if(Model.addHour == true) {
+					for(int i = 0; i < 60; i++) {
+						tick();
+					}
+					Model.addHour = false;
+					tickPause = Model.TempTickPause;
+				}
+				if(Model.addMinute == true) {
+					tick();
+					Model.addMinute = false;
+					tickPause = Model.TempTickPause;
+				}
 			}
 
 		}
@@ -265,7 +277,7 @@ public class Simulator implements Runnable {
 			break;
 		case RES:
 			for (int i = 0; i < numberOfCars; i++) {
-				entranceCarQueue.addCar(new ReservationCar());
+				entrancePassQueue.addCar(new ReservationCar());
 				SimulatorView.YellowQueue++;
 				SimulatorView.ArrivalCurrent++;
 			}

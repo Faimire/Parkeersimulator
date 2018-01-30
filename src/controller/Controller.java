@@ -43,9 +43,9 @@ public class Controller implements ActionListener {
 		button2.addActionListener(this);
 		button3 = new JButton("START OVER");
 		button3.addActionListener(this);
-		button4 = new JButton("+ 1");
+		button4 = new JButton("+ 1 hour");
 		button4.addActionListener(this);
-		button5 = new JButton("- 1");
+		button5 = new JButton("+ 1 minute");
 		button5.addActionListener(this);
 		button6 = new JButton("SLOWER");
 		button6.addActionListener(this);
@@ -110,6 +110,14 @@ public class Controller implements ActionListener {
 
 		if (e.getSource() == piebutton2) {
 			model.nextchart();
+		}
+		
+		if (e.getSource() == button4) {
+			model.addhour();
+		}
+		
+		if (e.getSource() == button5) {
+			model.addMinute();
 		}
 	}
 

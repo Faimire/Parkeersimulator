@@ -7,6 +7,10 @@ import main.PiechartThread;
 import main.Simulator;
 
 public class Model {
+	
+	public static boolean addHour;
+	public static boolean addMinute;
+	public static int TempTickPause;
 
 	public void start() {
 		Simulator.started = true;
@@ -58,6 +62,20 @@ public class Model {
 		else {
 			PiechartThread.whatchart = 2;
 		}
+	}
+	
+	public void addhour() {
+		Simulator.started = false;
+		TempTickPause = Simulator.tickPause;
+		Simulator.tickPause = 1;
+		addHour = true;
+	}
+	
+	public void addMinute() {
+		Simulator.started = false;
+		TempTickPause = Simulator.tickPause;
+		Simulator.tickPause = 1;
+		addMinute = true;
 	}
 
 }

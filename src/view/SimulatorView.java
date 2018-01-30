@@ -42,7 +42,9 @@ public class SimulatorView extends JFrame {
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
 		carParkView = new CarParkView();
+		carParkView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		// setups the ContentPane for views
 		clock();
 		contentPane = getContentPane();
@@ -74,6 +76,7 @@ public class SimulatorView extends JFrame {
 		contentPane.remove(panel);
 		panel = null;
 		panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
 
@@ -83,6 +86,7 @@ public class SimulatorView extends JFrame {
 		contentPane.remove(panel);
 		panel = null;
 		panel = new ChartPanel(Piechart.createChart(Piechart.createQueueDataset(), "Queue"));
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
 	}
@@ -91,6 +95,7 @@ public class SimulatorView extends JFrame {
 		contentPane.remove(panel);
 		panel = null;
 		panel = new ChartPanel(Piechart.createLineChart(Piechart.createhistogram(), "Histogram"));
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
 	}
@@ -98,6 +103,7 @@ public class SimulatorView extends JFrame {
 	// setups the clock label for view
 	public void clock() {
 		clock = new JLabel("DD:MM:YY");
+		clock.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		clock.setOpaque(true);
 		Font clockfont = clock.getFont();
 		clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
