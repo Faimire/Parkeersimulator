@@ -27,7 +27,8 @@ public class Simulator implements Runnable {
 	private static final String RES = "3";
 
 	private CarQueue entranceCarQueue;
-	private CarQueue entrancePassQueue;
+	private CarQueue entranceAbQueue;
+	private CarQueue entranceResQueue;
 	private CarQueue paymentCarQueue;
 	private CarQueue exitCarQueue;
 	public SimulatorView simulatorView;
@@ -46,8 +47,8 @@ public class Simulator implements Runnable {
 	int weekendArrivals = 50; // average number of arriving cars per hour
 	int weekDayPassArrivals = 100; // average number of arriving cars per hour
 	int weekendPassArrivals = 50; // average number of arriving cars per hour
-	int weekDayReservationArrivals = 30; // average number of reservations cars per hour
-	int weekendReservationArrivals = 30; // average number of reservations cars per hour
+	int weekDayReservationArrivals = 4; // average number of reservations cars per hour
+	int weekendReservationArrivals = 12; // average number of reservations cars per hour
 
 	int enterSpeed = 1; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
@@ -57,7 +58,8 @@ public class Simulator implements Runnable {
 
 	public Simulator() {
 		entranceCarQueue = new CarQueue();
-		entrancePassQueue = new CarQueue();
+		entranceAbQueue = new CarQueue();
+		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
 		simulatorView = new SimulatorView(3, 6, 30);
@@ -161,7 +163,8 @@ public class Simulator implements Runnable {
 
 	private void handleEntrance() {
 		carsArriving();
-		carsEntering(entrancePassQueue);
+		carsEntering(entranceAbQueue);
+		carsEntering(entranceResQueue);
 		carsEntering(entranceCarQueue);
 	}
 
@@ -261,29 +264,52 @@ public class Simulator implements Runnable {
 	private void addArrivingCars(int numberOfCars, String type) {
 		// Add the cars to the back of the queue.
 		switch (type) {
-		case AD_HOC:
-			for (int i = 0; i < numberOfCars; i++) {
-				entranceCarQueue.addCar(new AdHocCar());
-				SimulatorView.RedQueue++;
-				SimulatorView.ArrivalCurrent++;
-			}
-			break;
-		case PASS:
-			for (int i = 0; i < numberOfCars; i++) {
-				entrancePassQueue.addCar(new ParkingPassCar());
-				SimulatorView.BlueQueue++;
-				SimulatorView.ArrivalCurrent++;
-			}
-			break;
-		case RES:
-			for (int i = 0; i < numberOfCars; i++) {
-				entrancePassQueue.addCar(new ReservationCar());
-				SimulatorView.YellowQueue++;
-				SimulatorView.ArrivalCurrent++;
-			}
-			break;
+			case AD_HOC:
+				for (int i = 0; i < numberOfCars; i++) {
+					if (entranceCarQueue.carsInQueue() < 11) {
+						entranceCarQueue.addCar(new AdHocCar());
+					SimulatorView.RedQueue++;
+					SimulatorView.ArrivalCurrent++;
+					}
+			
+					else {
+						break;
+					}
+				}
+				
+				
+				case PASS:
+					for (int i = 0; i < numberOfCars; i++) {
+						if (entranceAbQueue.carsInQueue() < 16) {
+							entranceAbQueue.addCar(new ParkingPassCar());
+							SimulatorView.BlueQueue++;
+							SimulatorView.ArrivalCurrent++;
+						}
+				
+					else {
+						break;
+					}
+					}
+				
+				
+				case RES:
+					for (int i = 0; i < numberOfCars; i++) {
+						if (entranceResQueue.carsInQueue() < 6) {
+							entranceResQueue.addCar(new ReservationCar());
+							SimulatorView.YellowQueue++;
+							SimulatorView.ArrivalCurrent++;
+						}
+				
+					else {
+						break;
+					}
+					}
 		}
 	}
+				
+			
+			
+	
 
 
 	private void carLeavesSpot(Car car) {
