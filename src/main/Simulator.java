@@ -31,8 +31,6 @@ public class Simulator implements Runnable {
 	private CarQueue paymentCarQueue;
 	private CarQueue exitCarQueue;
 	public SimulatorView simulatorView;
-	private JProgressBar progressBar1;
-	private JMenuBar menuBar;
 	private Thread sim;
 
 	private int day = 0; // gives the day the simulator is on
