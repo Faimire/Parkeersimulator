@@ -28,6 +28,7 @@ public class SimulatorView extends JFrame {
 	public JButton button1, button2, button3, button4;
 	public static JLabel clock;
 	public static ChartPanel panel;
+	public static JScrollPane scrollPane;
 	// values for the charts
 	public static int blue = 0, red = 0, white = 540, yellow = 0;
 	public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
@@ -35,6 +36,7 @@ public class SimulatorView extends JFrame {
 	public static ArrayList<Integer> ArrivalHistogram = new ArrayList<Integer>();
 	public static ArrayList<Double> Profit = new ArrayList<Double>();
 	public static double Profitday = 0.00;
+	
 
 	public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
 		getContentPane().setBackground(SystemColor.gray);
@@ -45,7 +47,11 @@ public class SimulatorView extends JFrame {
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
 		carParkView = new CarParkView();
-		carParkView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		carParkView.setPreferredSize(new Dimension(1980,1080));
+		scrollPane = new JScrollPane(carParkView);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		panel = new ChartPanel(Chart.createChart(Chart.createDataset(0), "garage status"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		// setups the ContentPane for views
@@ -63,14 +69,14 @@ public class SimulatorView extends JFrame {
 	// adds the components to the pane
 	public void addToPane() {
 		contentPane.add(clock);
-		contentPane.add(carParkView);
+		contentPane.add(scrollPane);
 		contentPane.add(panel);
 	}
 
 	// setups the boundaries of the components added to contentPane
 	public void setupBounds() {
 		clock.setBounds(100, 600, 230, 50);
-		carParkView.setBounds(100, 75, 850, 500);
+		scrollPane.setBounds(100, 75, 850, 500);
 		panel.setBounds(1050, 75, 800, 400);
 	}
 

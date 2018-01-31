@@ -60,7 +60,7 @@ public class Simulator implements Runnable {
 		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
-		simulatorView = new SimulatorView(3, 6, 30);
+		simulatorView = new SimulatorView(3, 6, 50);
 		Controller controller = new Controller(simulatorView);
 		simulatorView.pack();
 		settingSimulatorView();
