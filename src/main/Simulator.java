@@ -163,6 +163,11 @@ public class Simulator implements Runnable {
 			SimulatorView.ArrivalCurrent = 0;
 
 		}
+		
+		if(hour == 0 && minute == 0) {
+			SimulatorView.Profit.add(SimulatorView.Profitday);
+			SimulatorView.Profitday = 0;
+		}
 
 	}
 
@@ -242,10 +247,6 @@ public class Simulator implements Runnable {
 			// TODO Handle payment.
 			carLeavesSpot(car);
 			i++;
-			if(hour == 0 && minute == 0) {
-				SimulatorView.Profit.add(SimulatorView.Profitday);
-				SimulatorView.Profitday = 0;
-			}
 			if(car.getHasToPay() == true && car.gethasReserved() == true) {
 				double carpay = car.getTotalHours() * 3.00;
 				SimulatorView.Profitday = SimulatorView.Profitday + carpay;

@@ -78,7 +78,7 @@ public class Piechart {
 		int length = SimulatorView.Profit.size();
 		int position = 0;
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i <= length; i++) {
 			position++;
 		}
 		if (length != 0) {
@@ -99,7 +99,7 @@ public class Piechart {
 		}
 
 		else {
-			dataset.setValue(0, "Euros", "day " + String.valueOf(position));
+			dataset.setValue(0, "Euros", "days " + String.valueOf(position));
 		}
 		return dataset;
 
