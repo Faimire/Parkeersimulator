@@ -253,6 +253,10 @@ public class Simulator implements Runnable {
 			}
 
 		}
+		
+		
+		
+		
 
 	}
 

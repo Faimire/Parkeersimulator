@@ -33,13 +33,21 @@ public class Piechart {
 
 	
 	public static PieDataset createQueueDataset() {
+		
 		DefaultPieDataset dataset = new DefaultPieDataset();
+		if(SimulatorView.RedQueue > 0 || SimulatorView.BlueQueue > 0 || SimulatorView.YellowQueue > 0 ) {
 		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.RedQueue),
 				new Integer(SimulatorView.RedQueue));
 		dataset.setValue("subscription " + String.valueOf(SimulatorView.BlueQueue),
 				new Integer(SimulatorView.BlueQueue));
 		dataset.setValue("reserved " + String.valueOf(SimulatorView.YellowQueue),
 				new Integer(SimulatorView.YellowQueue));
+		}
+		
+		if(SimulatorView.RedQueue == 0 && SimulatorView.BlueQueue == 0 && SimulatorView.YellowQueue == 0 ) {
+			dataset.setValue("no cars in queue", 1);
+			
+		}
 		return dataset;
 	}
 	
