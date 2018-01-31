@@ -25,6 +25,7 @@ public class SimulatorView extends JFrame {
 	private int numberOfOpenSpots;
 	private Car[][][] cars;
 	public static Container contentPane;
+	public static int FloorsFor = Integer.valueOf(Start.Floorsfor.getText());
 	// all the view elements that instantiate in the view
 	public JButton button1, button2, button3, button4;
 	public static JLabel clock;
@@ -206,7 +207,7 @@ public class SimulatorView extends JFrame {
 			// sets value of the amount red to blue cars
 			red++;
 			white--;
-			for (int floor = 1; floor < getNumberOfFloors(); floor++) {
+			for (int floor = FloorsFor; floor < getNumberOfFloors(); floor++) {
 				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
 						Location location = new Location(floor, row, place);

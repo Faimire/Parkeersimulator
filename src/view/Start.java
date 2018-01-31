@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 import main.Simulator;
 
 public class Start extends JFrame implements ActionListener {
-	public static JTextArea floors, rows, places;
+	public static JTextArea floors, rows, places, Floorsfor;
 	public static JButton startButton = new JButton("accept");
 	
 	public Start() {
@@ -19,16 +19,19 @@ public class Start extends JFrame implements ActionListener {
 		floors = new JTextArea("floors");
 		rows = new JTextArea("rows");
 		places = new JTextArea("places");
+		Floorsfor = new JTextArea("amount of floors for subscriptions");
 		startButton.addActionListener(this);
 		contentPane.setLayout(null);
 		contentPane.add(floors);
 		contentPane.add(rows);
 		contentPane.add(places);
 		contentPane.add(startButton);
-		floors.setBounds(200,400, 150, 25);
-		rows.setBounds(400,400, 150, 25);
-		places.setBounds(600,400, 150, 25);
-		startButton.setBounds(800, 400 ,150,25);
+		contentPane.add(Floorsfor);
+		Floorsfor.setBounds(200,400,200,25);
+		floors.setBounds(500,400, 150, 25);
+		rows.setBounds(700,400, 150, 25);
+		places.setBounds(900,400, 150, 25);
+		startButton.setBounds(1100, 400 ,150,25);
 		setVisible(true);
 		pack();
 	}
