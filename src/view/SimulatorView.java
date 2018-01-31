@@ -31,7 +31,8 @@ public class SimulatorView extends JFrame {
 	public static ChartPanel panel;
 	public static JScrollPane scrollPane;
 	// values for the charts
-	public static int blue = 0, red = 0, white = 540, yellow = 0;
+	public static int blue = 0, red = 0, white = (Integer.valueOf(Start.floors.getText())
+			*Integer.valueOf(Start.rows.getText())*Integer.valueOf(Start.places.getText())), yellow = 0;
 	public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
 	public static int ArrivalCurrent = 0;
 	public static ArrayList<Integer> ArrivalHistogram = new ArrayList<Integer>();
