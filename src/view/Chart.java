@@ -82,7 +82,8 @@ public class Chart {
 			position++;
 		}
 		if (length != 0) {
-			if (length <= 11) {
+			if (length < 11) {
+				dataset.addValue(0, "Euros", "day 0");
 				for (int f = 0; f < position; f++) {
 					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f + 1));
 				}
