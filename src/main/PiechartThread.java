@@ -17,11 +17,11 @@ public class PiechartThread implements Runnable {
 			}
 
 			if (whatchart == 2) {
-				SimulatorView.updatePie3();
+				SimulatorView.updateLine();
 			}
 			
 			if (whatchart == 3) {
-				SimulatorView.updatePie4();
+				SimulatorView.updateLine2();
 			}
 
 			try {
@@ -39,11 +39,11 @@ public class PiechartThread implements Runnable {
 				}
 
 				if (whatchart == 2) {
-					SimulatorView.updatePie3();
+					SimulatorView.updateLine();
 				}
 				
 				if (whatchart == 3) {
-					SimulatorView.updatePie4();
+					SimulatorView.updateLine2();
 				}
 
 				try {

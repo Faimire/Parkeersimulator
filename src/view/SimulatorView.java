@@ -46,7 +46,7 @@ public class SimulatorView extends JFrame {
 
 		carParkView = new CarParkView();
 		carParkView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+		panel = new ChartPanel(Chart.createChart(Chart.createDataset(0), "garage status"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		// setups the ContentPane for views
 		clock();
@@ -78,7 +78,7 @@ public class SimulatorView extends JFrame {
 	public static void updatePie() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+		panel = new ChartPanel(Chart.createChart(Chart.createDataset(0), "garage status"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
@@ -88,25 +88,25 @@ public class SimulatorView extends JFrame {
 	public static void updatePie2() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createChart(Piechart.createQueueDataset(), "Queue entrance"));
+		panel = new ChartPanel(Chart.createChart(Chart.createQueueDataset(), "Queue entrance"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
 	}
 
-	public static void updatePie3() {
+	public static void updateLine() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createLineChart(Piechart.createhistogram(), "Histogram"));
+		panel = new ChartPanel(Chart.createLineChart(Chart.createhistogram(), "Histogram"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
 	}
 	
-	public static void updatePie4() {
+	public static void updateLine2() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createLineProfitChart(Piechart.createProfitDay(), "Profit of the day"));
+		panel = new ChartPanel(Chart.createLineProfitChart(Chart.createProfitDay(), "Profit of the day"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);

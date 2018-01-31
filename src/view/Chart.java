@@ -20,7 +20,7 @@ import org.jfree.data.general.PieDataset;
 
 import main.Simulator;
 
-public class Piechart {
+public class Chart {
 
 	public static PieDataset createDataset(int i) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
