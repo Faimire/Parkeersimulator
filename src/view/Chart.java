@@ -34,12 +34,18 @@ public class Chart {
 	
 	public static PieDataset createQueueDataset() {
 		DefaultPieDataset dataset = new DefaultPieDataset();
+		if(SimulatorView.RedQueue > 0 || SimulatorView.YellowQueue > 0 || SimulatorView.BlueQueue > 0 ) {
 		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.RedQueue),
 				new Integer(SimulatorView.RedQueue));
 		dataset.setValue("subscription " + String.valueOf(SimulatorView.BlueQueue),
 				new Integer(SimulatorView.BlueQueue));
 		dataset.setValue("reserved " + String.valueOf(SimulatorView.YellowQueue),
 				new Integer(SimulatorView.YellowQueue));
+		}
+		
+		if(SimulatorView.RedQueue == 0 && SimulatorView.YellowQueue == 0 && SimulatorView.BlueQueue == 0 ) {
+			dataset.setValue("there are no cars in the queue", 1);
+		}
 		return dataset;
 	}
 	

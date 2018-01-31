@@ -45,12 +45,12 @@ public class Simulator implements Runnable {
 	int weekendArrivals = 50; // average number of arriving cars per hour
 	int weekDayPassArrivals = 100; // average number of arriving cars per hour
 	int weekendPassArrivals = 50; // average number of arriving cars per hour
-	int weekDayReservationArrivals = 4; // average number of reservations cars per hour
+	int weekDayReservationArrivals = 100; // average number of reservations cars per hour
 	int weekendReservationArrivals = 12; // average number of reservations cars per hour
 
 	int enterSpeed = 1; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
-	int exitSpeed = 1; // number of cars that can leave per minute
+	int exitSpeed = 2; // number of cars that can leave per minute
 
 	public static boolean started = true;// says if the application is started or not
 
@@ -112,11 +112,11 @@ public class Simulator implements Runnable {
 	private void tick() {
 		SimulatorView.clock.setText("  Minutes " + String.valueOf(minute) + ":" + " Hours " + String.valueOf(hour) + ":"
 				+ " Days " + String.valueOf(day));
+		ChangeValues();
 		advanceTime();
 		handleExit();
 		updateViews();
 		updateCharts();
-		ChangeValues();
 		// Pause.
 		try {
 			Thread.sleep(tickPause);
@@ -146,8 +146,54 @@ public class Simulator implements Runnable {
 	}
 	
 	private void ChangeValues() {
-		if(day == 1 && hour > 7 && minute < 60) {
-			weekDayArrivals = 200;
+		if (day == 4 && hour > 16 && hour < 23){
+			weekDayArrivals = 500;
+			weekDayPassArrivals = 500;
+			weekDayReservationArrivals = 500;
+			//weekend
+			weekendPassArrivals = 50; 
+			weekDayReservationArrivals = 4;
+			weekendReservationArrivals = 12;
+		}
+		
+		else if (day == 5 && hour > 18) {
+			weekDayArrivals = 500;
+			weekDayPassArrivals = 500;
+			weekDayReservationArrivals = 500;
+			//weekend
+			weekendPassArrivals = 50; 
+			weekDayReservationArrivals = 4;
+			weekendReservationArrivals = 12;
+		}
+		
+		else if (day == 6 && hour > 18) {
+			weekDayArrivals = 100;
+			weekDayPassArrivals = 100;
+			weekDayReservationArrivals = 4;
+			//weekend
+			weekendPassArrivals = 500;
+			weekDayReservationArrivals = 500;
+			weekendReservationArrivals = 500;
+		}
+		
+		else if (day == 7 && hour > 12 && hour < 17) {
+			weekDayArrivals = 100;
+			weekDayPassArrivals = 100;
+			weekDayReservationArrivals = 4;
+			//weekend
+			weekendPassArrivals = 500;
+			weekendArrivals = 500;
+			weekendReservationArrivals = 500;
+		}
+		
+		else {
+			weekDayArrivals = 100; 
+			weekendArrivals = 50; 
+			weekDayPassArrivals = 100;
+			weekendPassArrivals = 50; 
+			weekDayReservationArrivals = 50;
+			weekendReservationArrivals = 12;
+
 		}
 	}
 	
@@ -285,30 +331,29 @@ public class Simulator implements Runnable {
 		switch (type) {
 			case AD_HOC:
 				for (int i = 0; i < numberOfCars; i++) {
-					if (entranceCarQueue.carsInQueue() < 11) {
+					if (entranceCarQueue.carsInQueue() < 21) {
 						entranceCarQueue.addCar(new AdHocCar());
 					SimulatorView.RedQueue++;
 					SimulatorView.ArrivalCurrent++;
 					}
 			
-					else {
-						break;
-					}
+					
 				}
-				
-				
+				break;
+						
 				case PASS:
 					for (int i = 0; i < numberOfCars; i++) {
-						if (entranceAbQueue.carsInQueue() < 16) {
+						if (entranceAbQueue.carsInQueue() < 11) {
 							entranceAbQueue.addCar(new ParkingPassCar());
 							SimulatorView.BlueQueue++;
 							SimulatorView.ArrivalCurrent++;
 						}
 				
-					else {
-						break;
+				    
+						
+					
 					}
-					}
+					break;
 				
 				
 				case RES:
@@ -319,10 +364,9 @@ public class Simulator implements Runnable {
 							SimulatorView.ArrivalCurrent++;
 						}
 				
-					else {
-						break;
+					
 					}
-					}
+					break;
 		}
 	}
 				
