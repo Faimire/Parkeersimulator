@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Container;
 import java.awt.Dimension;
 
 import java.awt.Toolkit;
@@ -19,6 +20,7 @@ import logic.*;
 import view.*;
 
 import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 public class Simulator implements Runnable {
 
@@ -53,17 +55,33 @@ public class Simulator implements Runnable {
 	int exitSpeed = 2; // number of cars that can leave per minute
 
 	public static boolean started = true;// says if the application is started or not
+	public static boolean initialize = false;
+	
+	 public static JTextArea floors,rows,places;
+	 public Start starter;
 
 	public Simulator() {
+		if(initialize == false) {
+			starter = new Start();
+			starter.setSize(1920,1080);
+			starter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			while(initialize ==  false) {
+				System.out.println("initing");
+			}
+		}
+		if(initialize == true) {
+		starter.dispose();
 		entranceCarQueue = new CarQueue();
 		entranceAbQueue = new CarQueue();
 		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
-		simulatorView = new SimulatorView(3, 6, 50);
+		simulatorView = new SimulatorView(Integer.valueOf(Start.floors.getText()), Integer.valueOf(Start.rows.getText())
+				, Integer.valueOf(Start.places.getText()));
 		Controller controller = new Controller(simulatorView);
 		simulatorView.pack();
 		settingSimulatorView();
+		}
 
 	}
 

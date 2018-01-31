@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+
 import javax.swing.border.Border;
 
 import org.jfree.chart.ChartPanel;
@@ -72,6 +73,7 @@ public class SimulatorView extends JFrame {
 		contentPane.add(scrollPane);
 		contentPane.add(panel);
 	}
+	
 
 	// setups the boundaries of the components added to contentPane
 	public void setupBounds() {
