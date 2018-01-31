@@ -172,7 +172,7 @@ public class Simulator implements Runnable {
 			weekDayReservationArrivals = 4;
 			//weekend
 			weekendPassArrivals = 500;
-			weekDayReservationArrivals = 500;
+			weekendArrivals = 500; 
 			weekendReservationArrivals = 500;
 		}
 		
