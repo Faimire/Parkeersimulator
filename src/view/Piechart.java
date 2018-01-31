@@ -73,6 +73,38 @@ public class Piechart {
 
 		return dataset;
 	}
+	
+	public static DefaultCategoryDataset createProfitDay() {
+		int length = SimulatorView.Profit.size();
+		int position = 0;
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		for (int i = 0; i < length; i++) {
+			position++;
+		}
+		if (length != 0) {
+			if (length <= 11) {
+				for (int f = 0; f < position; f++) {
+					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f));
+				}
+			}
+		}
+
+		if (length != 0) {
+			if (length > 11) {
+				int lenght2 = SimulatorView.Profit.size();
+				for (int f = lenght2 - 11; f < position; f++) {
+					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f));
+				}
+			}
+		}
+
+		else {
+			dataset.setValue(0, "Euros", "day " + String.valueOf(position));
+		}
+		return dataset;
+
+		
+	}
 
 
 	public static JFreeChart createChart(PieDataset dataset, String name) {
@@ -89,6 +121,13 @@ public class Piechart {
 		         true,true,false);
 		return chart;
 	}
+	
+	public static JFreeChart createLineProfitChart(DefaultCategoryDataset dataset, String name) {
+		JFreeChart chart = ChartFactory.createLineChart(name, "days", "profit", dataset, PlotOrientation.VERTICAL,
+		         true,true,false);
+		return chart;
+	}
+	
 
 	public static JPanel createDemoPanel() {
 		JFreeChart chart = createChart(createDataset(200), "demopanel");

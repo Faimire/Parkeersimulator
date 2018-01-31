@@ -19,6 +19,10 @@ public class PiechartThread implements Runnable {
 			if (whatchart == 2) {
 				SimulatorView.updatePie3();
 			}
+			
+			if (whatchart == 3) {
+				SimulatorView.updatePie4();
+			}
 
 			try {
 				Thread.sleep(1);
@@ -36,6 +40,10 @@ public class PiechartThread implements Runnable {
 
 				if (whatchart == 2) {
 					SimulatorView.updatePie3();
+				}
+				
+				if (whatchart == 3) {
+					SimulatorView.updatePie4();
 				}
 
 				try {

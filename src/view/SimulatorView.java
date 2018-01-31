@@ -28,10 +28,13 @@ public class SimulatorView extends JFrame {
 	public JButton button1, button2, button3, button4;
 	public static JLabel clock;
 	public static ChartPanel panel;
+	// values for the charts
 	public static int blue = 0, red = 0, white = 540, yellow = 0;
 	public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
 	public static int ArrivalCurrent = 0;
 	public static ArrayList<Integer> ArrivalHistogram = new ArrayList<Integer>();
+	public static ArrayList<Double> Profit = new ArrayList<Double>();
+	public static double Profitday = 0.00;
 
 	public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
 		getContentPane().setBackground(SystemColor.gray);
@@ -85,7 +88,7 @@ public class SimulatorView extends JFrame {
 	public static void updatePie2() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createChart(Piechart.createQueueDataset(), "Queue"));
+		panel = new ChartPanel(Piechart.createChart(Piechart.createQueueDataset(), "Queue entrance"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
@@ -95,6 +98,15 @@ public class SimulatorView extends JFrame {
 		contentPane.remove(panel);
 		panel = null;
 		panel = new ChartPanel(Piechart.createLineChart(Piechart.createhistogram(), "Histogram"));
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		contentPane.add(panel);
+		panel.setBounds(1050, 75, 800, 400);
+	}
+	
+	public static void updatePie4() {
+		contentPane.remove(panel);
+		panel = null;
+		panel = new ChartPanel(Piechart.createLineProfitChart(Piechart.createProfitDay(), "Profit of the day"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
