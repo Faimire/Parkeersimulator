@@ -115,7 +115,7 @@ public class Simulator implements Runnable {
 		advanceTime();
 		handleExit();
 		updateViews();
-		updatehistogram();
+		updateCharts();
 		ChangeValues();
 		// Pause.
 		try {
@@ -151,7 +151,7 @@ public class Simulator implements Runnable {
 		}
 	}
 	
-	private void updatehistogram() {
+	private void updateCharts() {
 		int length = SimulatorView.ArrivalHistogram.size();
 		int position = 0;
 		if (minute == 1) {
