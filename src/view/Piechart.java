@@ -78,13 +78,13 @@ public class Piechart {
 		int length = SimulatorView.Profit.size();
 		int position = 0;
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for (int i = 0; i <= length; i++) {
+		for (int i = 0; i < length; i++) {
 			position++;
 		}
 		if (length != 0) {
 			if (length <= 11) {
 				for (int f = 0; f < position; f++) {
-					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f));
+					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f + 1));
 				}
 			}
 		}
@@ -93,7 +93,7 @@ public class Piechart {
 			if (length > 11) {
 				int lenght2 = SimulatorView.Profit.size();
 				for (int f = lenght2 - 11; f < position; f++) {
-					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f));
+					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f + 1));
 				}
 			}
 		}
