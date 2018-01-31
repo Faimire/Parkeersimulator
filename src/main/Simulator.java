@@ -48,7 +48,7 @@ public class Simulator implements Runnable {
 	int weekDayReservationArrivals = 100; // average number of reservations cars per hour
 	int weekendReservationArrivals = 12; // average number of reservations cars per hour
 
-	int enterSpeed = 1; // number of cars that can enter per minute
+	int enterSpeed = 2; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
 	int exitSpeed = 2; // number of cars that can leave per minute
 
@@ -152,8 +152,8 @@ public class Simulator implements Runnable {
 			weekDayReservationArrivals = 500;
 			//weekend
 			weekendPassArrivals = 50; 
-			weekDayReservationArrivals = 4;
-			weekendReservationArrivals = 12;
+			weekendArrivals = 50; 
+			weekendReservationArrivals = 30;
 		}
 		
 		else if (day == 5 && hour > 18) {
@@ -162,8 +162,8 @@ public class Simulator implements Runnable {
 			weekDayReservationArrivals = 500;
 			//weekend
 			weekendPassArrivals = 50; 
-			weekDayReservationArrivals = 4;
-			weekendReservationArrivals = 12;
+			weekendArrivals = 50; 
+			weekendReservationArrivals = 30;
 		}
 		
 		else if (day == 6 && hour > 18) {
@@ -192,7 +192,7 @@ public class Simulator implements Runnable {
 			weekDayPassArrivals = 100;
 			weekendPassArrivals = 50; 
 			weekDayReservationArrivals = 50;
-			weekendReservationArrivals = 12;
+			weekendReservationArrivals = 30;
 
 		}
 	}
