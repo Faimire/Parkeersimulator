@@ -11,6 +11,7 @@ public abstract class Car {
     private boolean hasToPay;
     private boolean hasReserved;
     private boolean carReadyToEnterGarage;
+    protected int totalHours;
 
     /**
      * Constructor for objects of class Car
@@ -18,6 +19,10 @@ public abstract class Car {
     
     public Car() {
 
+    }
+    
+    public int getTotalHours() {
+    	return totalHours;
     }
 
     public Location getLocation() {

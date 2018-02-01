@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Container;
 import java.awt.Dimension;
 
 import java.awt.Toolkit;
@@ -19,6 +20,7 @@ import logic.*;
 import view.*;
 
 import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 public class Simulator implements Runnable {
 
@@ -43,6 +45,7 @@ public class Simulator implements Runnable {
 
 	public static int tickPause = 100;
 
+
 	int weekDayArrivals = 100; // average number of arriving non-subscription cars per hour
 	int weekendArrivals = 150; // average number of arriving non-subscription cars per hour in weekend
 	int weekDayPassArrivals = 50; // average number of pass cars per hour
@@ -53,22 +56,39 @@ public class Simulator implements Runnable {
 	int rushHourPass = 150; // average number of pass cars per hour during rush hour
 	int rushHourReservation = 100; // average number of reservations cars per hour during rush hour
 
+
 	int enterSpeed = 2; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
 	int exitSpeed = 2; // number of cars that can leave per minute
 
 	public static boolean started = true;// says if the application is started or not
+	public static boolean initialize = false;
+	
+	 public static JTextArea floors,rows,places;
+	 public Start starter;
 
 	public Simulator() {
+		if(initialize == false) {
+			starter = new Start();
+			starter.setSize(1920,1080);
+			starter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			while(initialize ==  false) {
+				System.out.println("initing");
+			}
+		}
+		if(initialize == true) {
+		starter.dispose();
 		entranceCarQueue = new CarQueue();
 		entranceAbQueue = new CarQueue();
 		entranceResQueue = new CarQueue();
 		paymentCarQueue = new CarQueue();
 		exitCarQueue = new CarQueue();
-		simulatorView = new SimulatorView(3, 6, 30);
+		simulatorView = new SimulatorView(Integer.valueOf(Start.floors.getText()), Integer.valueOf(Start.rows.getText())
+				, Integer.valueOf(Start.places.getText()));
 		Controller controller = new Controller(simulatorView);
 		simulatorView.pack();
 		settingSimulatorView();
+		}
 
 	}
 
@@ -94,6 +114,7 @@ public class Simulator implements Runnable {
 
 		while (started == true) {
 			tick();
+			System.out.println(weekDayArrivals);
 			while (started == false) {
 				System.out.println("stopped");
 				if(Model.addHour == true) {
@@ -118,11 +139,11 @@ public class Simulator implements Runnable {
 	private void tick() {
 		SimulatorView.clock.setText("  Minutes " + String.valueOf(minute) + ":" + " Hours " + String.valueOf(hour) + ":"
 				+ " Days " + String.valueOf(day));
+		//ChangeValues();
 		advanceTime();
 		handleExit();
 		updateViews();
-		updatehistogram();
-		ChangeValues();
+		updateCharts();
 		// Pause.
 		try {
 			Thread.sleep(tickPause);
@@ -150,14 +171,61 @@ public class Simulator implements Runnable {
 		}
 
 	}
-	
+	/*
 	private void ChangeValues() {
-		if(day == 1 && hour > 7 && minute < 60) {
-			weekDayArrivals = 200;
+		if (day == 4 && hour > 16 && hour < 23) {
+			weekDayArrivals = 500;
+			weekDayPassArrivals = 500;
+			weekDayReservationArrivals = 500;
+			//weekend
+			weekendPassArrivals = 50; 
+			weekendArrivals = 50; 
+			weekendReservationArrivals = 30;
 		}
-	}
+		
+		else if (day == 5 && hour > 18) {
+			weekDayArrivals = 500;
+			weekDayPassArrivals = 500;
+			weekDayReservationArrivals = 500;
+			//weekend
+			weekendPassArrivals = 50; 
+			weekendArrivals = 50; 
+			weekendReservationArrivals = 30;
+		}
+		
+		else if (day == 6 && hour > 18) {
+			weekDayArrivals = 100;
+			weekDayPassArrivals = 100;
+			weekDayReservationArrivals = 4;
+			//weekend
+			weekendPassArrivals = 500;
+			weekendArrivals = 500; 
+			weekendReservationArrivals = 500;
+		}
+		
+		else if (day == 7 && hour > 12 && hour < 17) {
+			weekDayArrivals = 100;
+			weekDayPassArrivals = 100;
+			weekDayReservationArrivals = 4;
+			//weekend
+			weekendPassArrivals = 500;
+			weekendArrivals = 500;
+			weekendReservationArrivals = 500;
+		}
+		
+		else {
+			weekDayArrivals = 100; 
+			weekendArrivals = 50; 
+			weekDayPassArrivals = 100;
+			weekendPassArrivals = 50; 
+			weekDayReservationArrivals = 50;
+			weekendReservationArrivals = 30;
+
+		}
+	}*/ 
+	//if ever changing your mind
 	
-	private void updatehistogram() {
+	private void updateCharts() {
 		int length = SimulatorView.ArrivalHistogram.size();
 		int position = 0;
 		if (minute == 1) {
@@ -168,6 +236,11 @@ public class Simulator implements Runnable {
 			SimulatorView.ArrivalHistogram.add(SimulatorView.ArrivalCurrent);
 			SimulatorView.ArrivalCurrent = 0;
 
+		}
+		
+		if(hour == 0 && minute == 0) {
+			SimulatorView.Profit.add(SimulatorView.Profitday);
+			SimulatorView.Profitday = 0;
 		}
 
 	}
@@ -294,6 +367,15 @@ public class Simulator implements Runnable {
 			// TODO Handle payment.
 			carLeavesSpot(car);
 			i++;
+			if(car.getHasToPay() == true && car.gethasReserved() == true) {
+				double carpay = car.getTotalHours() * 3.00;
+				SimulatorView.Profitday = SimulatorView.Profitday + carpay;
+			}
+			
+			if(car.getHasToPay() == true && car.gethasReserved() == false) {
+				double carpay = car.getTotalHours() * 3.50;
+				SimulatorView.Profitday = SimulatorView.Profitday + carpay;
+			}
 		}
 	}
 
@@ -333,6 +415,7 @@ public class Simulator implements Runnable {
 				break;
 					
 				
+
 				case PASS:
 					for (int i = 0; i < numberOfCars; i++) {
 						if (entranceAbQueue.carsInQueue() < 11) {
@@ -340,8 +423,14 @@ public class Simulator implements Runnable {
 							SimulatorView.BlueQueue++;
 							SimulatorView.ArrivalCurrent++;
 						}
+
+				
+				    
+						
+					
 					}
 					break;
+				
 				
 				case RES:
 					for (int i = 0; i < numberOfCars; i++) {
@@ -350,6 +439,8 @@ public class Simulator implements Runnable {
 							SimulatorView.YellowQueue++;
 							SimulatorView.ArrivalCurrent++;	
 						}
+
+
 					}
 					break;
 		}

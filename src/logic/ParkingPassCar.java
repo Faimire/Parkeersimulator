@@ -6,11 +6,13 @@ import java.awt.*;
 public class ParkingPassCar extends Car {
 	private static final Color COLOR=Color.blue;
 	
+	
     public ParkingPassCar() {
     	
     	Random random = new Random();
     	this.sethasReserved(false);
     	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
+    	totalHours = Math.round(stayMinutes/60);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
     }

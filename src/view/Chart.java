@@ -20,7 +20,7 @@ import org.jfree.data.general.PieDataset;
 
 import main.Simulator;
 
-public class Piechart {
+public class Chart {
 
 	public static PieDataset createDataset(int i) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
@@ -35,7 +35,9 @@ public class Piechart {
 	public static PieDataset createQueueDataset() {
 		
 		DefaultPieDataset dataset = new DefaultPieDataset();
-		if(SimulatorView.RedQueue > 0 || SimulatorView.BlueQueue > 0 || SimulatorView.YellowQueue > 0 ) {
+
+		if(SimulatorView.RedQueue > 0 || SimulatorView.YellowQueue > 0 || SimulatorView.BlueQueue > 0 ) {
+
 		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.RedQueue),
 				new Integer(SimulatorView.RedQueue));
 		dataset.setValue("subscription " + String.valueOf(SimulatorView.BlueQueue),
@@ -44,9 +46,10 @@ public class Piechart {
 				new Integer(SimulatorView.YellowQueue));
 		}
 		
-		if(SimulatorView.RedQueue == 0 && SimulatorView.BlueQueue == 0 && SimulatorView.YellowQueue == 0 ) {
-			dataset.setValue("no cars in queue", 1);
-			
+
+		if(SimulatorView.RedQueue == 0 && SimulatorView.YellowQueue == 0 && SimulatorView.BlueQueue == 0 ) {
+			dataset.setValue("there are no cars in the queue", 1);
+
 		}
 		return dataset;
 	}
@@ -81,6 +84,39 @@ public class Piechart {
 
 		return dataset;
 	}
+	
+	public static DefaultCategoryDataset createProfitDay() {
+		int length = SimulatorView.Profit.size();
+		int position = 0;
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		for (int i = 0; i < length; i++) {
+			position++;
+		}
+		if (length != 0) {
+			if (length <= 11) {
+				dataset.addValue(0, "Euros", "day 0");
+				for (int f = 0; f < position; f++) {
+					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f + 1));
+				}
+			}
+		}
+
+		if (length != 0) {
+			if (length > 11) {
+				int lenght2 = SimulatorView.Profit.size();
+				for (int f = lenght2 - 11; f < position; f++) {
+					dataset.addValue(SimulatorView.Profit.get(f), "Euros", "day " + String.valueOf(f + 1));
+				}
+			}
+		}
+
+		else {
+			dataset.setValue(0, "Euros", "days " + String.valueOf(position));
+		}
+		return dataset;
+
+		
+	}
 
 
 	public static JFreeChart createChart(PieDataset dataset, String name) {
@@ -97,6 +133,13 @@ public class Piechart {
 		         true,true,false);
 		return chart;
 	}
+	
+	public static JFreeChart createLineProfitChart(DefaultCategoryDataset dataset, String name) {
+		JFreeChart chart = ChartFactory.createLineChart(name, "days", "profit", dataset, PlotOrientation.VERTICAL,
+		         true,true,false);
+		return chart;
+	}
+	
 
 	public static JPanel createDemoPanel() {
 		JFreeChart chart = createChart(createDataset(200), "demopanel");

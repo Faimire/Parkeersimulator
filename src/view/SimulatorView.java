@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+
 import javax.swing.border.Border;
 
 import org.jfree.chart.ChartPanel;
@@ -24,14 +25,21 @@ public class SimulatorView extends JFrame {
 	private int numberOfOpenSpots;
 	private Car[][][] cars;
 	public static Container contentPane;
+	public static int FloorsFor = Integer.valueOf(Start.Floorsfor.getText());
 	// all the view elements that instantiate in the view
 	public JButton button1, button2, button3, button4;
 	public static JLabel clock;
 	public static ChartPanel panel;
-	public static int blue = 0, red = 0, white = 540, yellow = 0;
+	public static JScrollPane scrollPane;
+	// values for the charts
+	public static int blue = 0, red = 0, white = (Integer.valueOf(Start.floors.getText())
+			*Integer.valueOf(Start.rows.getText())*Integer.valueOf(Start.places.getText())), yellow = 0;
 	public static int BlueQueue = 0, RedQueue = 0, YellowQueue = 0;
 	public static int ArrivalCurrent = 0;
 	public static ArrayList<Integer> ArrivalHistogram = new ArrayList<Integer>();
+	public static ArrayList<Double> Profit = new ArrayList<Double>();
+	public static double Profitday = 0.00;
+	
 
 	public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
 		getContentPane().setBackground(SystemColor.gray);
@@ -42,8 +50,12 @@ public class SimulatorView extends JFrame {
 		cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
 
 		carParkView = new CarParkView();
-		carParkView.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+		carParkView.setPreferredSize(new Dimension(1980,1080));
+		scrollPane = new JScrollPane(carParkView);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		panel = new ChartPanel(Chart.createChart(Chart.createDataset(0), "garage status"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		// setups the ContentPane for views
 		clock();
@@ -60,14 +72,15 @@ public class SimulatorView extends JFrame {
 	// adds the components to the pane
 	public void addToPane() {
 		contentPane.add(clock);
-		contentPane.add(carParkView);
+		contentPane.add(scrollPane);
 		contentPane.add(panel);
 	}
+	
 
 	// setups the boundaries of the components added to contentPane
 	public void setupBounds() {
 		clock.setBounds(100, 600, 230, 50);
-		carParkView.setBounds(100, 75, 850, 500);
+		scrollPane.setBounds(100, 75, 850, 500);
 		panel.setBounds(1050, 75, 800, 400);
 	}
 
@@ -75,7 +88,7 @@ public class SimulatorView extends JFrame {
 	public static void updatePie() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createChart(Piechart.createDataset(0), "garage status"));
+		panel = new ChartPanel(Chart.createChart(Chart.createDataset(0), "garage status"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
@@ -85,16 +98,25 @@ public class SimulatorView extends JFrame {
 	public static void updatePie2() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createChart(Piechart.createQueueDataset(), "Queue"));
+		panel = new ChartPanel(Chart.createChart(Chart.createQueueDataset(), "Queue entrance"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
 	}
 
-	public static void updatePie3() {
+	public static void updateLine() {
 		contentPane.remove(panel);
 		panel = null;
-		panel = new ChartPanel(Piechart.createLineChart(Piechart.createhistogram(), "Histogram"));
+		panel = new ChartPanel(Chart.createLineChart(Chart.createhistogram(), "Histogram"));
+		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		contentPane.add(panel);
+		panel.setBounds(1050, 75, 800, 400);
+	}
+	
+	public static void updateLine2() {
+		contentPane.remove(panel);
+		panel = null;
+		panel = new ChartPanel(Chart.createLineProfitChart(Chart.createProfitDay(), "Profit of the day"));
 		panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		contentPane.add(panel);
 		panel.setBounds(1050, 75, 800, 400);
@@ -185,7 +207,7 @@ public class SimulatorView extends JFrame {
 			// sets value of the amount red to blue cars
 			red++;
 			white--;
-			for (int floor = 1; floor < getNumberOfFloors(); floor++) {
+			for (int floor = FloorsFor; floor < getNumberOfFloors(); floor++) {
 				for (int row = 0; row < getNumberOfRows(); row++) {
 					for (int place = 0; place < getNumberOfPlaces(); place++) {
 						Location location = new Location(floor, row, place);

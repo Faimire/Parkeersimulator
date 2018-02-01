@@ -43,7 +43,7 @@ public class Model {
 
 	public void nextchart() {
 
-		if (PiechartThread.whatchart < 2) {
+		if (PiechartThread.whatchart < 3) {
 			PiechartThread.whatchart += 1;
 		}
 
@@ -60,7 +60,7 @@ public class Model {
 		}
 
 		else {
-			PiechartThread.whatchart = 2;
+			PiechartThread.whatchart = 3;
 		}
 	}
 	
