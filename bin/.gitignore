@@ -1,3 +1,5 @@
-/main/
-/view/
+/controller/
 /logic/
+/main/
+/runner/
+/view/

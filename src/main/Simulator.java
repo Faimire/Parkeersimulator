@@ -53,7 +53,7 @@ public class Simulator implements Runnable {
 	int rushHourPass = 150; // average number of pass cars per hour during rush hour
 	int rushHourReservation = 100; // average number of reservations cars per hour during rush hour
 
-	int enterSpeed = 1; // number of cars that can enter per minute
+	int enterSpeed = 2; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
 	int exitSpeed = 2; // number of cars that can leave per minute
 
@@ -246,7 +246,9 @@ public class Simulator implements Runnable {
 		while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
 			Car car = queue.removeCar();
 			Location freeLocation = simulatorView.getFirstFreeLocation(car);
-			simulatorView.setCarAt(freeLocation, car);
+			if(freeLocation!=null) {
+				simulatorView.setCarAt(freeLocation, car);
+			}
 			i++;
 
 			if(car.gethasReserved() == true && car.getHasToPay() == true && freeLocation != null) {
