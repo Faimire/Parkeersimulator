@@ -270,7 +270,9 @@ public class Simulator implements Runnable {
 		while (queue.carsInQueue() > 0 && simulatorView.getNumberOfOpenSpots() > 0 && i < enterSpeed) {
 			Car car = queue.removeCar();
 			Location freeLocation = simulatorView.getFirstFreeLocation(car);
-			simulatorView.setCarAt(freeLocation, car);
+			if(freeLocation!=null) {
+				simulatorView.setCarAt(freeLocation, car);
+			}
 			i++;
 
 			if(car.gethasReserved() == true && car.getHasToPay() == true && freeLocation != null) {
