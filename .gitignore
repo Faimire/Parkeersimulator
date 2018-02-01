@@ -1,2 +1,7 @@
 
 bin/main/Simulator.class
+bin/main/Simulator.class
+bin/view/SimulatorView.class
+bin/view/SimulatorView.class
+*.class
+.classpath

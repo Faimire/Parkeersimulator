@@ -32,6 +32,8 @@ public class Simulator implements Runnable {
 	private CarQueue paymentCarQueue;
 	private CarQueue exitCarQueue;
 	public SimulatorView simulatorView;
+	private JProgressBar progressBar1;
+	private JMenuBar menuBar;
 	private Thread sim;
 
 	private int day = 0; // gives the day the simulator is on
@@ -41,16 +43,19 @@ public class Simulator implements Runnable {
 
 	public static int tickPause = 100;
 
-	int weekDayArrivals = 100; // average number of arriving cars per hour
-	int weekendArrivals = 50; // average number of arriving cars per hour
-	int weekDayPassArrivals = 100; // average number of arriving cars per hour
-	int weekendPassArrivals = 50; // average number of arriving cars per hour
-	int weekDayReservationArrivals = 4; // average number of reservations cars per hour
-	int weekendReservationArrivals = 12; // average number of reservations cars per hour
+	int weekDayArrivals = 100; // average number of arriving non-subscription cars per hour
+	int weekendArrivals = 150; // average number of arriving non-subscription cars per hour in weekend
+	int weekDayPassArrivals = 50; // average number of pass cars per hour
+	int weekendPassArrivals = 100; // average number of pass cars per hour in weekend
+	int weekDayReservationArrivals = 30; // average number of reservations cars per hour
+	int weekendReservationArrivals = 50; // average number of reservations cars per hour in weekend
+	int rushHour = 200; // average number of non-subscription cars per hour during rush hour
+	int rushHourPass = 150; // average number of pass cars per hour during rush hour
+	int rushHourReservation = 100; // average number of reservations cars per hour during rush hour
 
 	int enterSpeed = 1; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
-	int exitSpeed = 1; // number of cars that can leave per minute
+	int exitSpeed = 2; // number of cars that can leave per minute
 
 	public static boolean started = true;// says if the application is started or not
 
@@ -67,6 +72,7 @@ public class Simulator implements Runnable {
 
 	}
 
+	
 	public void start() {
 		if (sim == null) {
 			sim = new Thread(this, "simulator");
@@ -185,13 +191,53 @@ public class Simulator implements Runnable {
 		simulatorView.updateView();
 	}
 
+
 	private void carsArriving() {
-		int numberOfCars = getNumberOfCars(weekDayArrivals, weekendArrivals);
-		addArrivingCars(numberOfCars, AD_HOC);
-		numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
-		addArrivingCars(numberOfCars, PASS);
-		numberOfCars = getNumberOfCars(weekDayReservationArrivals, weekendReservationArrivals);
-		addArrivingCars(numberOfCars, RES);
+		// rush hour Thursday evening
+		if (day == 4 && hour > 16 && hour < 23) {
+			int numberOfCars = getNumberOfCars(rushHour, weekendArrivals);
+			addArrivingCars(numberOfCars, AD_HOC);
+			numberOfCars = getNumberOfCars(rushHour, weekendPassArrivals);
+			addArrivingCars(numberOfCars, PASS);
+			numberOfCars = getNumberOfCars(rushHour, weekendReservationArrivals);
+			addArrivingCars(numberOfCars, RES);
+		}
+		// rush hour Friday evening
+		else if (day == 5 && hour > 18) {
+			int numberOfCars = getNumberOfCars(rushHour, weekendArrivals );
+			addArrivingCars(numberOfCars, AD_HOC);
+			numberOfCars = getNumberOfCars(rushHour, weekendPassArrivals);
+			addArrivingCars(numberOfCars, PASS);
+			numberOfCars = getNumberOfCars(rushHour, weekendReservationArrivals);
+			addArrivingCars(numberOfCars, RES);
+		}
+		// rush hour Saturday evening
+		else if (day == 6 && hour > 18) {
+			int numberOfCars = getNumberOfCars(weekDayArrivals, rushHour);
+			addArrivingCars(numberOfCars, AD_HOC);
+			numberOfCars = getNumberOfCars(weekDayPassArrivals, rushHourPass);
+			addArrivingCars(numberOfCars, PASS);
+			numberOfCars = getNumberOfCars(weekDayReservationArrivals, rushHourReservation);
+			addArrivingCars(numberOfCars, RES);
+		}
+		// rush hour Sunday
+		else if (day == 7 && hour > 12 && hour < 17) {
+			int numberOfCars = getNumberOfCars(weekDayArrivals, rushHour);
+			addArrivingCars(numberOfCars, AD_HOC);
+			numberOfCars = getNumberOfCars(weekDayPassArrivals, rushHourPass);
+			addArrivingCars(numberOfCars, PASS);
+			numberOfCars = getNumberOfCars(weekDayReservationArrivals, rushHourReservation);
+			addArrivingCars(numberOfCars, RES);
+		}
+		// normal amount of arriving cars
+		else {
+			int numberOfCars = getNumberOfCars(weekDayArrivals, rushHour);
+			addArrivingCars(numberOfCars, AD_HOC);
+			numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
+			addArrivingCars(numberOfCars, PASS);
+			numberOfCars = getNumberOfCars(weekDayReservationArrivals, weekendReservationArrivals);
+			addArrivingCars(numberOfCars, RES);
+		}
 	}
 
 	private void carsEntering(CarQueue queue) {
@@ -214,6 +260,10 @@ public class Simulator implements Runnable {
 			}
 
 		}
+		
+		
+		
+		
 
 	}
 
@@ -271,46 +321,38 @@ public class Simulator implements Runnable {
 		switch (type) {
 			case AD_HOC:
 				for (int i = 0; i < numberOfCars; i++) {
-					if (entranceCarQueue.carsInQueue() < 11) {
+					if (entranceCarQueue.carsInQueue() < 21) {
 						entranceCarQueue.addCar(new AdHocCar());
-					SimulatorView.RedQueue++;
-					SimulatorView.ArrivalCurrent++;
-					}
-			
-					else {
-						break;
+						SimulatorView.RedQueue++;
+						SimulatorView.ArrivalCurrent++;
+						
 					}
 				}
-				
+				break;
+					
 				
 				case PASS:
 					for (int i = 0; i < numberOfCars; i++) {
-						if (entranceAbQueue.carsInQueue() < 16) {
+						if (entranceAbQueue.carsInQueue() < 11) {
 							entranceAbQueue.addCar(new ParkingPassCar());
 							SimulatorView.BlueQueue++;
 							SimulatorView.ArrivalCurrent++;
 						}
-				
-					else {
-						break;
 					}
-					}
-				
+					break;
 				
 				case RES:
 					for (int i = 0; i < numberOfCars; i++) {
-						if (entranceResQueue.carsInQueue() < 6) {
+						if (entranceResQueue.carsInQueue() < 6 ) {	
 							entranceResQueue.addCar(new ReservationCar());
 							SimulatorView.YellowQueue++;
-							SimulatorView.ArrivalCurrent++;
+							SimulatorView.ArrivalCurrent++;	
 						}
-				
-					else {
-						break;
 					}
-					}
+					break;
 		}
 	}
+					
 				
 			
 			
