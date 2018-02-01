@@ -49,11 +49,11 @@ public class Simulator implements Runnable {
 	int weekendPassArrivals = 100; // average number of pass cars per hour in weekend
 	int weekDayReservationArrivals = 30; // average number of reservations cars per hour
 	int weekendReservationArrivals = 50; // average number of reservations cars per hour in weekend
-	int rushHour = 500; // average number of non-subscription cars per hour during rush hour
-	int rushHourPass = 500; // average number of pass cars per hour during rush hour
-	int rushHourReservation = 500; // average number of reservations cars per hour during rush hour
+	int rushHour = 200; // average number of non-subscription cars per hour during rush hour
+	int rushHourPass = 150; // average number of pass cars per hour during rush hour
+	int rushHourReservation = 100; // average number of reservations cars per hour during rush hour
 
-	int enterSpeed = 2; // number of cars that can enter per minute
+	int enterSpeed = 1; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
 	int exitSpeed = 2; // number of cars that can leave per minute
 
@@ -197,7 +197,7 @@ public class Simulator implements Runnable {
 		}
 		// rush hour Friday evening
 		else if (day == 5 && hour > 18) {
-			int numberOfCars = getNumberOfCars(rushHour, weekendArrivals);
+			int numberOfCars = getNumberOfCars(rushHour, weekendArrivals );
 			addArrivingCars(numberOfCars, AD_HOC);
 			numberOfCars = getNumberOfCars(rushHour, weekendPassArrivals);
 			addArrivingCars(numberOfCars, PASS);
@@ -226,9 +226,9 @@ public class Simulator implements Runnable {
 		else {
 			int numberOfCars = getNumberOfCars(weekDayArrivals, rushHour);
 			addArrivingCars(numberOfCars, AD_HOC);
-			numberOfCars = getNumberOfCars(weekDayPassArrivals, rushHourPass);
+			numberOfCars = getNumberOfCars(weekDayPassArrivals, weekendPassArrivals);
 			addArrivingCars(numberOfCars, PASS);
-			numberOfCars = getNumberOfCars(weekDayReservationArrivals, rushHourReservation);
+			numberOfCars = getNumberOfCars(weekDayReservationArrivals, weekendReservationArrivals);
 			addArrivingCars(numberOfCars, RES);
 		}
 	}
@@ -253,6 +253,10 @@ public class Simulator implements Runnable {
 			}
 
 		}
+		
+		
+		
+		
 
 	}
 
