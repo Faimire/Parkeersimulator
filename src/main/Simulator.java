@@ -106,6 +106,7 @@ public class Simulator implements Runnable {
 
 		while (started == true) {
 			tick();
+			System.out.println(weekDayArrivals);
 			while (started == false) {
 				System.out.println("stopped");
 				if(Model.addHour == true) {
