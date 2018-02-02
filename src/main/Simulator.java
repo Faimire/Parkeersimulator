@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -60,6 +62,8 @@ public class Simulator implements Runnable {
 	int enterSpeed = 2; // number of cars that can enter per minute
 	int paymentSpeed = 3; // number of cars that can pay per minute
 	int exitSpeed = 2; // number of cars that can leave per minute
+	
+	
 
 	public static boolean started = true;// says if the application is started or not
 	public static boolean initialize = false;

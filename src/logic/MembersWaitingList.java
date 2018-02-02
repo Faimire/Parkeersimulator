@@ -2,9 +2,22 @@ package logic;
 
 import java.util.*;
 
-public class MembersList {
+
+//Waiting list for new subscription members
+public class MembersWaitingList {
 	
-	private Queue<Integer> member = new LinkedList<>();
 	
+		public void membersWaitingList() {
+			Queue<Integer> member = new LinkedList<>();
+			
+			if (member.size() < 999 ) {
+				member.addAll(member);
+				member.addAll(member);
+				member.addAll(member);
+			}
+			else if (member.size() == 150) {
+				member.poll();
+			}
+		}
 
 }

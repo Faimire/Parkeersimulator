@@ -8,13 +8,19 @@ public class ParkingPassCar extends Car {
 	
 	
     public ParkingPassCar() {
+    	int i = 0; 
     	
+    	if (i < 51) {
     	Random random = new Random();
     	this.sethasReserved(false);
     	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
     	totalHours = Math.round(stayMinutes/60);
         this.setMinutesLeft(stayMinutes);
         this.setHasToPay(false);
+        i ++;
+    	}
+    	
+    	
     }
     
     public Color getColor(){
