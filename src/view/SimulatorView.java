@@ -40,7 +40,12 @@ public class SimulatorView extends JFrame {
 	public static ArrayList<Double> Profit = new ArrayList<Double>();
 	public static double Profitday = 0.00;
 	
-
+	/**
+	 * The constructor SimulatorView
+	 * @param numberOfFloors The number of floors
+	 * @param numberOfRows The number of rows
+	 * @param numberOfPlaces The number of places
+	 */
 	public SimulatorView(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
 		getContentPane().setBackground(SystemColor.gray);
 		this.numberOfFloors = numberOfFloors;
@@ -69,7 +74,9 @@ public class SimulatorView extends JFrame {
 		updateView();
 	}
 
-	// adds the components to the pane
+	/**
+	 * adds the components to the pane
+	 */
 	public void addToPane() {
 		contentPane.add(clock);
 		contentPane.add(scrollPane);
@@ -77,14 +84,18 @@ public class SimulatorView extends JFrame {
 	}
 	
 
-	// setups the boundaries of the components added to contentPane
+	/**
+	 * setups the boundaries of the components added to contentPane
+	 */
 	public void setupBounds() {
 		clock.setBounds(100, 600, 230, 50);
 		scrollPane.setBounds(100, 75, 850, 500);
 		panel.setBounds(1050, 75, 800, 400);
 	}
 
-	// updates the data on the chart and removes the old chart for less memory usage
+	/**
+	 * updates the data on the chart and removes the old chart for less memory usage
+	 */
 	public static void updatePie() {
 		contentPane.remove(panel);
 		panel = null;
@@ -95,6 +106,9 @@ public class SimulatorView extends JFrame {
 
 	}
 
+	/**
+	 * Updates pie number 2
+	 */
 	public static void updatePie2() {
 		contentPane.remove(panel);
 		panel = null;
@@ -104,6 +118,9 @@ public class SimulatorView extends JFrame {
 		panel.setBounds(1050, 75, 800, 400);
 	}
 
+	/**
+	 * Updates chart
+	 */
 	public static void updateLine() {
 		contentPane.remove(panel);
 		panel = null;
@@ -113,6 +130,9 @@ public class SimulatorView extends JFrame {
 		panel.setBounds(1050, 75, 800, 400);
 	}
 	
+	/**
+	 * Updates chart
+	 */
 	public static void updateLine2() {
 		contentPane.remove(panel);
 		panel = null;
@@ -122,7 +142,9 @@ public class SimulatorView extends JFrame {
 		panel.setBounds(1050, 75, 800, 400);
 	}
 
-	// setups the clock label for view
+	/**
+	 * setups the clock label for view
+	 */
 	public void clock() {
 		clock = new JLabel("DD:MM:YY");
 		clock.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -131,26 +153,50 @@ public class SimulatorView extends JFrame {
 		clock.setFont(new Font(clockfont.getName(), Font.PLAIN, 15));
 	}
 
+	/**
+	 * Updates the view
+	 */
 	public void updateView() {
 		carParkView.updateView();
 	}
 
+	/**
+	 * 
+	 * @return returns the number of floors
+	 */
 	public int getNumberOfFloors() {
 		return numberOfFloors;
 	}
 
+	/**
+	 * 
+	 * @return returns the number of rows
+	 */
 	public int getNumberOfRows() {
 		return numberOfRows;
 	}
 
+	/**
+	 * 
+	 * @return returns the number of places
+	 */
 	public int getNumberOfPlaces() {
 		return numberOfPlaces;
 	}
 
+	/**
+	 * 
+	 * @return returns the number of open spots
+	 */
 	public int getNumberOfOpenSpots() {
 		return numberOfOpenSpots;
 	}
 
+	/**
+	 * 
+	 * @param location Gives the location
+	 * @return returns null if location is not valid
+	 */
 	public Car getCarAt(Location location) {
 		if (!locationIsValid(location)) {
 			return null;
@@ -158,6 +204,12 @@ public class SimulatorView extends JFrame {
 		return cars[location.getFloor()][location.getRow()][location.getPlace()];
 	}
 
+	/**
+	 * 
+	 * @param location Set a location in the parking area
+	 * @param car Set the car in the parking area
+	 * @return returns if the car has been set
+	 */
 	public boolean setCarAt(Location location, Car car) {
 		if (!locationIsValid(location)) {
 			return false;
@@ -172,6 +224,11 @@ public class SimulatorView extends JFrame {
 		return false;
 	}
 
+	/**
+	 * 
+	 * @param location Removes a car at a location
+	 * @return returns if the car has been removed
+	 */
 	public Car removeCarAt(Location location) {
 		if (!locationIsValid(location)) {
 			return null;
@@ -200,7 +257,12 @@ public class SimulatorView extends JFrame {
 		return car;
 	}
 
-	// gives cars the place they need park
+	
+	/**
+	 * gives cars the place they need park
+	 * @param car Provide the car the first free spot which is available
+	 * @return returns if the car is on a free spot
+	 */
 	public Location getFirstFreeLocation(Car car) {
 
 		if (car.gethasReserved() == false && car.getHasToPay() == true) {
@@ -257,6 +319,10 @@ public class SimulatorView extends JFrame {
 		return null;
 	}
 
+	/**
+	 * Leaving cars
+	 * @return returns if a car is leaving
+	 */
 	public Car getFirstLeavingCar() {
 		for (int floor = 0; floor < getNumberOfFloors(); floor++) {
 			for (int row = 0; row < getNumberOfRows(); row++) {
@@ -272,6 +338,9 @@ public class SimulatorView extends JFrame {
 		return null;
 	}
 
+	/**
+	 * Ticks for the simulator
+	 */
 	public void tick() {
 		for (int floor = 0; floor < getNumberOfFloors(); floor++) {
 			for (int row = 0; row < getNumberOfRows(); row++) {
@@ -286,6 +355,11 @@ public class SimulatorView extends JFrame {
 		}
 	}
 
+	/**
+	 * 
+	 * @param location Checks if the location is valid
+	 * @return returns if the location is valid
+	 */
 	private boolean locationIsValid(Location location) {
 		int floor = location.getFloor();
 		int row = location.getRow();
@@ -331,6 +405,9 @@ public class SimulatorView extends JFrame {
 			}
 		}
 
+		/**
+		 * Updates the view
+		 */
 		public void updateView() {
 			// Create a new car park image if the size has changed.
 			if (!size.equals(getSize())) {

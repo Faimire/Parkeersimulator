@@ -36,6 +36,9 @@ public class Start extends JFrame implements ActionListener {
 		pack();
 	}
 	
+	/**
+	 * @param e Uses an event
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startButton) {
 			Simulator.initialize = true;
