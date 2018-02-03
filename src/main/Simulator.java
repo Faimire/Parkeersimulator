@@ -71,6 +71,10 @@ public class Simulator implements Runnable {
 	 public static JTextArea floors,rows,places;
 	 public Start starter;
 
+	/**
+	 * The constructor Simulator
+	 * Initializes a resolution 
+	 */
 	public Simulator() {
 		if(initialize == false) {
 			starter = new Start();
@@ -96,7 +100,9 @@ public class Simulator implements Runnable {
 
 	}
 
-	
+	/**
+	 * Starts a thread
+	 */
 	public void start() {
 		if (sim == null) {
 			sim = new Thread(this, "simulator");
@@ -104,7 +110,9 @@ public class Simulator implements Runnable {
 		}
 	}
 
-	// setups the simulatorView
+	/**
+	 * setups the simulatorView
+	 */
 	public void settingSimulatorView() {
 		simulatorView.setSize(1980, 1080);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -113,7 +121,9 @@ public class Simulator implements Runnable {
 		simulatorView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	// runs the program in a while loop
+	/**
+	 * runs the program in a while loop
+	 */
 	public void run() {
 
 		while (started == true) {
@@ -139,7 +149,9 @@ public class Simulator implements Runnable {
 
 	}
 
-	// updates the clock and handles the Simulator
+	/**
+	 * updates the clock and handles the Simulator
+	 */
 	private void tick() {
 		SimulatorView.clock.setText("  Minutes " + String.valueOf(minute) + ":" + " Hours " + String.valueOf(hour) + ":"
 				+ " Days " + String.valueOf(day));
@@ -158,7 +170,9 @@ public class Simulator implements Runnable {
 
 	}
 
-	// advances the time when tick is used
+	/**
+	 * advances the time when tick is used
+	 */
 	private void advanceTime() {
 		// Advance the time by one minute.
 		minute++;
@@ -229,6 +243,9 @@ public class Simulator implements Runnable {
 	}*/ 
 	//if ever changing your mind
 	
+	/**
+	 * Updates the charts
+	 */
 	private void updateCharts() {
 		int length = SimulatorView.ArrivalHistogram.size();
 		int position = 0;
@@ -249,6 +266,9 @@ public class Simulator implements Runnable {
 
 	}
 
+	/**
+	 * Handles the car entrance
+	 */
 	private void handleEntrance() {
 		carsArriving();
 		carsEntering(entranceAbQueue);
@@ -256,12 +276,18 @@ public class Simulator implements Runnable {
 		carsEntering(entranceCarQueue);
 	}
 
+	/**
+	 * Handles the exit
+	 */
 	private void handleExit() {
 		carsReadyToLeave();
 		carsPaying();
 		carsLeaving();
 	}
 
+	/**
+	 * Updates the views
+	 */
 	private void updateViews() {
 		simulatorView.tick();
 		// Update the car park view.
@@ -269,6 +295,9 @@ public class Simulator implements Runnable {
 	}
 
 
+	/**
+	 * Handles the cars arring including rush hours
+	 */
 	private void carsArriving() {
 		// rush hour Thursday evening
 		if (day == 4 && hour > 16 && hour < 23) {
@@ -317,6 +346,10 @@ public class Simulator implements Runnable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param queue The car queue
+	 */
 	private void carsEntering(CarQueue queue) {
 		int i = 0;
 		// Remove car from the front of the queue and assign to a parking space.
@@ -346,6 +379,9 @@ public class Simulator implements Runnable {
 
 	}
 
+	/**
+	 * Cars which are ready to leave
+	 */
 	private void carsReadyToLeave() {
 		// Add leaving cars to the payment queue.
 		Car car = simulatorView.getFirstLeavingCar();
@@ -362,7 +398,9 @@ public class Simulator implements Runnable {
 
 
 
-
+	/**
+	 * Cars which are paying
+	 */
 	private void carsPaying() {
 		// Let cars pay.
 		int i = 0;
@@ -383,6 +421,9 @@ public class Simulator implements Runnable {
 		}
 	}
 
+	/**
+	 * The cars which are leaving
+	 */
 	private void carsLeaving() {
 		// Let cars leave.
 		int i = 0;
@@ -392,6 +433,12 @@ public class Simulator implements Runnable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param weekDay Number of cars on a weekday
+	 * @param weekend Number of cars in the weekend
+	 * @return the number of cars
+	 */
 	private int getNumberOfCars(int weekDay, int weekend) {
 		Random random = new Random();
 
@@ -404,6 +451,11 @@ public class Simulator implements Runnable {
 		return (int) Math.round(numberOfCarsPerHour / 60);
 	}
 
+	/**
+	 * 
+	 * @param numberOfCars The number of cars arriving
+	 * @param type The types of car arriving
+	 */
 	private void addArrivingCars(int numberOfCars, String type) {
 		// Add the cars to the back of the queue.
 		switch (type) {
@@ -456,15 +508,28 @@ public class Simulator implements Runnable {
 	
 
 
+	/**
+	 * Removes a car when leaving the spot
+	 * @param car A car which leaves the spot
+	 */
 	private void carLeavesSpot(Car car) {
 		simulatorView.removeCarAt(car.getLocation());
 		exitCarQueue.addCar(car);
 	}
 
+	/**
+	 * 
+	 * @return If the simulator is started
+	 */
 	public boolean isStarted() {
 		return started;
 	}
 
+	/**
+	 * 
+	 * @param started If the simulator is started
+	 * @return started
+	 */
 	public boolean setStarted(boolean started) {
 		this.started = started;
 		return started;
