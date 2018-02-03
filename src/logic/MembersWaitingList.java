@@ -6,7 +6,9 @@ import java.util.*;
 //Waiting list for new subscription members
 public class MembersWaitingList {
 	
-	
+		/**
+		 * Creates a new  Linkedlist
+		 */
 		public void membersWaitingList() {
 			Queue<Integer> member = new LinkedList<>();
 			

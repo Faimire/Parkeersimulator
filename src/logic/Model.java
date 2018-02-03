@@ -12,14 +12,23 @@ public class Model {
 	public static boolean addMinute;
 	public static int TempTickPause;
 
+	/**
+	 * Starts the simulator
+	 */
 	public void start() {
 		Simulator.started = true;
 	}
 
+	/**
+	 * Pauses the simulator
+	 */
 	public void pause() {
 		Simulator.started = false;
 	}
 
+	/**
+	 * Speeds up the simulator
+	 */
 	public void faster() {
 		if (Simulator.tickPause > 10) {
 			Simulator.tickPause -= 10;
@@ -32,15 +41,24 @@ public class Model {
 		
 	}
 
+	/**
+	 * Slows down the simulator
+	 */
 	public void slower() {
 		Simulator.tickPause += 10;
 
 	}
-
+	
+	/**
+	 * Resets the simulator
+	 */
 	public void startover() {
 
 	}
 
+	/**
+	 * Continues to the next chart
+	 */
 	public void nextchart() {
 
 		if (PiechartThread.whatchart < 3) {
@@ -52,7 +70,10 @@ public class Model {
 		}
 
 	}
-
+	
+	/**
+	 * Go back to the previous chart
+	 */
 	public void previouschart() {
 
 		if (PiechartThread.whatchart > 0) {
@@ -64,6 +85,9 @@ public class Model {
 		}
 	}
 	
+	/**
+	 * Adds one hour
+	 */
 	public void addhour() {
 		Simulator.started = false;
 		TempTickPause = Simulator.tickPause;
@@ -71,6 +95,9 @@ public class Model {
 		addHour = true;
 	}
 	
+	/**
+	 * Adds one minute
+	 */
 	public void addMinute() {
 		Simulator.started = false;
 		TempTickPause = Simulator.tickPause;

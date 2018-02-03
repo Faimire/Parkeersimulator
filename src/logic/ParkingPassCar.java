@@ -7,6 +7,9 @@ public class ParkingPassCar extends Car {
 	private static final Color COLOR=Color.blue;
 	
 	
+	/**
+	 * the constructor for initializing the parking pass
+	 */
     public ParkingPassCar() {
     	int i = 0; 
     	
@@ -23,6 +26,9 @@ public class ParkingPassCar extends Car {
     	
     }
     
+    /**
+     * @return returns the color
+     */
     public Color getColor(){
     	return COLOR;
     }
