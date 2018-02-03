@@ -21,22 +21,27 @@ public abstract class Car {
 
     }
     
+    // returns the total hours
     public int getTotalHours() {
     	return totalHours;
     }
 
+    // returns the location
     public Location getLocation() {
         return location;
     }
 
+    
     public void setLocation(Location location) {
         this.location = location;
     }
 
+    // returns the minutes left
     public int getMinutesLeft() {
         return minutesLeft;
     }
     
+    // returns the amount of minutes
     public int getamountOfMinutes() {
     	return amountOfMinutes;
     	

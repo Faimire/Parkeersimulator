@@ -20,6 +20,10 @@ public class Controller implements ActionListener {
 	public SimulatorView view;
 	public static Model model;
 
+	/**
+	 * The constructor Controller
+	 * @param view The view of the simulator
+	 */
 	public Controller(SimulatorView view) {
 		// Initializing the model
 		model = new Model();
@@ -35,7 +39,10 @@ public class Controller implements ActionListener {
 		view.getContentPane().add(menuBar);
 
 	}
-
+	
+	/**
+	 * The buttons in the simulator
+	 */
 	public void iniButtons() {
 		// Starts the simulator
 		button1 = new JButton("START");
@@ -67,7 +74,11 @@ public class Controller implements ActionListener {
 		GUIpanel = new JPanel();
 
 	}
-	// Adds the GUI buttons to the simulator
+	
+	/**
+	 * Adds the GUI buttons to the simulator
+	 * @param view New button
+	 */
 	public void addButtons(SimulatorView view) {
 		GUIpanel.add(button1);
 		GUIpanel.add(button2);
@@ -81,7 +92,9 @@ public class Controller implements ActionListener {
 		view.add(GUIpanel);
 	}
 
-	// Initializes the size and position of the buttons
+	/**
+	 * Initializes the size and position of the buttons
+	 */
 	public void setupButtons() {
         
 		GUIpanel.setLayout(null);
@@ -98,7 +111,10 @@ public class Controller implements ActionListener {
 		button1.setBounds(50, 250, 273, 65);
 	}
 
-	// give the actions that the buttons are performed a method.
+	/**
+	 * gives information about an event
+	 * @param e Uses an event
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button1) {
 			model.start();
