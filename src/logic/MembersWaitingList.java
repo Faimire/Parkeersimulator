@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan, Nick, Rick and Mark
+ * @version 1.0
+ */
 package logic;
 
 import java.util.*;
@@ -6,7 +10,9 @@ import java.util.*;
 //Waiting list for new subscription members
 public class MembersWaitingList {
 	
-	
+		/**
+		 * Creates a new  Linkedlist
+		 */
 		public void membersWaitingList() {
 			Queue<Integer> member = new LinkedList<>();
 			

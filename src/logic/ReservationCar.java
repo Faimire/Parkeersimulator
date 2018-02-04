@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan, Nick, Rick and Mark
+ * @version 1.0
+ */
 package logic;
 
 import java.util.Random;
@@ -6,6 +10,10 @@ import java.awt.*;
 public class ReservationCar extends Car {
 	private static final Color COLOR=Color.orange;
 	
+	/**
+	 * The constructor for reservation
+	 * Creates random numbers
+	 */
     public ReservationCar() {
     	
     	Random random = new Random();
@@ -17,6 +25,9 @@ public class ReservationCar extends Car {
 
     }
     
+    /**
+     * @return returns the color
+     */
     public Color getColor(){
     	return COLOR;
     }

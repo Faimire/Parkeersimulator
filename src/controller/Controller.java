@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan, Nick, Rick and Mark
+ * @version 1.0
+ */
 package controller;
 
 import java.awt.Color;
@@ -20,6 +24,10 @@ public class Controller implements ActionListener {
 	public SimulatorView view;
 	public static Model model;
 
+	/**
+	 * The constructor Controller
+	 * @param view The view of the simulator
+	 */
 	public Controller(SimulatorView view) {
 		// Initializing the model
 		model = new Model();
@@ -35,30 +43,46 @@ public class Controller implements ActionListener {
 		view.getContentPane().add(menuBar);
 
 	}
-
+	
+	/**
+	 * The buttons in the simulator
+	 */
 	public void iniButtons() {
+		// Starts the simulator
 		button1 = new JButton("START");
 		button1.addActionListener(this);
+		// sets the simulator on pause
 		button2 = new JButton("PAUSE");
 		button2.addActionListener(this);
+		// Resets the simulator
 		button3 = new JButton("START OVER");
 		button3.addActionListener(this);
+		// Increases the simulator time by one hour
 		button4 = new JButton("+ 1 hour");
 		button4.addActionListener(this);
+		// Increases the simulator time by one minute
 		button5 = new JButton("+ 1 minute");
 		button5.addActionListener(this);
+		// Slows down the simulation
 		button6 = new JButton("SLOWER");
 		button6.addActionListener(this);
+		// Speeds us the simulation
 		button7 = new JButton("FASTER");
 		button7.addActionListener(this);
+		// Go back one chart
 		piebutton1 = new JButton("previous");
 		piebutton1.addActionListener(this);
+		// Move forward one chart
 		piebutton2 = new JButton("next");
 		piebutton2.addActionListener(this);
 		GUIpanel = new JPanel();
 
 	}
-
+	
+	/**
+	 * Adds the GUI buttons to the simulator
+	 * @param view New button
+	 */
 	public void addButtons(SimulatorView view) {
 		GUIpanel.add(button1);
 		GUIpanel.add(button2);
@@ -72,6 +96,9 @@ public class Controller implements ActionListener {
 		view.add(GUIpanel);
 	}
 
+	/**
+	 * Initializes the size and position of the buttons
+	 */
 	public void setupButtons() {
         
 		GUIpanel.setLayout(null);
@@ -88,7 +115,10 @@ public class Controller implements ActionListener {
 		button1.setBounds(50, 250, 273, 65);
 	}
 
-	// give the actions that the buttons are performed a method.
+	/**
+	 * gives information about an event
+	 * @param e Uses an event
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button1) {
 			model.start();

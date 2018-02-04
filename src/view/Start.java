@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan, Nick, Rick and Mark
+ * @version 1.0
+ */
 package view;
 
 import java.awt.Container;
@@ -36,6 +40,9 @@ public class Start extends JFrame implements ActionListener {
 		pack();
 	}
 	
+	/**
+	 * @param e Uses an event
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startButton) {
 			Simulator.initialize = true;

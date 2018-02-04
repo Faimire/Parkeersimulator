@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan, Nick, Rick and Mark
+ * @version 1.0
+ */
 package view;
 
 import java.awt.Color;
@@ -22,6 +26,11 @@ import main.Simulator;
 
 public class Chart {
 
+	/**
+	 * 
+	 * @param i sets i
+	 * @return returns a dataset
+	 */
 	public static PieDataset createDataset(int i) {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		dataset.setValue("non-subscription " + String.valueOf(SimulatorView.red), new Integer(SimulatorView.red));
@@ -31,7 +40,10 @@ public class Chart {
 		return dataset;
 	}
 
-	
+	/**
+	 * 
+	 * @return returns a dataset
+	 */
 	public static PieDataset createQueueDataset() {
 		
 		DefaultPieDataset dataset = new DefaultPieDataset();
@@ -54,6 +66,10 @@ public class Chart {
 		return dataset;
 	}
 	
+	/**
+	 * 
+	 * @return returns a dataset
+	 */
 	public static DefaultCategoryDataset createhistogram() {
 		int length = SimulatorView.ArrivalHistogram.size();
 		int position = 0;
@@ -85,6 +101,10 @@ public class Chart {
 		return dataset;
 	}
 	
+	/**
+	 * 
+	 * @return returns a dataset
+	 */
 	public static DefaultCategoryDataset createProfitDay() {
 		int length = SimulatorView.Profit.size();
 		int position = 0;
@@ -119,6 +139,12 @@ public class Chart {
 	}
 
 
+	/**
+	 * 
+	 * @param dataset Uses the Piedataset
+	 * @param name Uses the name
+	 * @return returns the chart
+	 */
 	public static JFreeChart createChart(PieDataset dataset, String name) {
 		JFreeChart chart = ChartFactory.createRingChart(name, // chart title
 				dataset, // data
@@ -128,12 +154,24 @@ public class Chart {
 		return chart;
 	}
 	
+	/**
+	 * 
+	 * @param dataset Uses a dataset
+	 * @param name uses a name
+	 * @return returns a chart
+	 */
 	public static JFreeChart createLineChart(DefaultCategoryDataset dataset, String name) {
 		JFreeChart chart = ChartFactory.createLineChart(name, "hours", "cars", dataset, PlotOrientation.VERTICAL,
 		         true,true,false);
 		return chart;
 	}
 	
+	/**
+	 * 
+	 * @param dataset Uses a dataset
+	 * @param name Uses a name
+	 * @return returns a chart
+	 */
 	public static JFreeChart createLineProfitChart(DefaultCategoryDataset dataset, String name) {
 		JFreeChart chart = ChartFactory.createLineChart(name, "days", "profit", dataset, PlotOrientation.VERTICAL,
 		         true,true,false);
@@ -141,6 +179,10 @@ public class Chart {
 	}
 	
 
+	/**
+	 * 
+	 * @return returns a new chart
+	 */
 	public static JPanel createDemoPanel() {
 		JFreeChart chart = createChart(createDataset(200), "demopanel");
 		return new ChartPanel(chart);
