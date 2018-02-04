@@ -57,6 +57,7 @@ public class Simulator implements Runnable {
 	int rushHour = 200; // average number of non-subscription cars per hour during rush hour
 	int rushHourPass = 150; // average number of pass cars per hour during rush hour
 	int rushHourReservation = 100; // average number of reservations cars per hour during rush hour
+	int maxMembers = 150; // Maximum of parking members
 
 
 	int enterSpeed = 2; // number of cars that can enter per minute
@@ -175,59 +176,7 @@ public class Simulator implements Runnable {
 		}
 
 	}
-	/*
-	private void ChangeValues() {
-		if (day == 4 && hour > 16 && hour < 23) {
-			weekDayArrivals = 500;
-			weekDayPassArrivals = 500;
-			weekDayReservationArrivals = 500;
-			//weekend
-			weekendPassArrivals = 50; 
-			weekendArrivals = 50; 
-			weekendReservationArrivals = 30;
-		}
-		
-		else if (day == 5 && hour > 18) {
-			weekDayArrivals = 500;
-			weekDayPassArrivals = 500;
-			weekDayReservationArrivals = 500;
-			//weekend
-			weekendPassArrivals = 50; 
-			weekendArrivals = 50; 
-			weekendReservationArrivals = 30;
-		}
-		
-		else if (day == 6 && hour > 18) {
-			weekDayArrivals = 100;
-			weekDayPassArrivals = 100;
-			weekDayReservationArrivals = 4;
-			//weekend
-			weekendPassArrivals = 500;
-			weekendArrivals = 500; 
-			weekendReservationArrivals = 500;
-		}
-		
-		else if (day == 7 && hour > 12 && hour < 17) {
-			weekDayArrivals = 100;
-			weekDayPassArrivals = 100;
-			weekDayReservationArrivals = 4;
-			//weekend
-			weekendPassArrivals = 500;
-			weekendArrivals = 500;
-			weekendReservationArrivals = 500;
-		}
-		
-		else {
-			weekDayArrivals = 100; 
-			weekendArrivals = 50; 
-			weekDayPassArrivals = 100;
-			weekendPassArrivals = 50; 
-			weekDayReservationArrivals = 50;
-			weekendReservationArrivals = 30;
-
-		}
-	}*/ 
-	//if ever changing your mind
+	
 	
 	private void updateCharts() {
 		int length = SimulatorView.ArrivalHistogram.size();
@@ -334,7 +283,7 @@ public class Simulator implements Runnable {
 			if(car.gethasReserved() == false && car.getHasToPay() == true && freeLocation != null) {
 				SimulatorView.RedQueue--;
 			}
-			if(car.gethasReserved() == false && car.getHasToPay() == false && freeLocation != null) {
+			if(car.gethasReserved() == false && car.getHasToPay() == false && freeLocation != null ) {
 				SimulatorView.BlueQueue--;
 			}
 
