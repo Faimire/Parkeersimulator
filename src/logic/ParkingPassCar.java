@@ -1,3 +1,7 @@
+/**
+ * @author Jonathan, Nick, Rick and Mark
+ * @version
+ */
 package logic;
 
 import java.util.Random;
